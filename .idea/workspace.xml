@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="added sample images">
-      <change afterPath="$PROJECT_DIR$/example_images/8% SLES 70-COAB 45 in DI Water.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example_images/SLES 70 8% w-w in DI Water.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example_images/water control.png" afterDir="false" />
+    <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Canny Edge Detector.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Canny Edge Detector.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,11 +57,23 @@
       <workItem from="1676050759688" duration="60000" />
       <workItem from="1676050831070" duration="1048000" />
       <workItem from="1676379749676" duration="1792000" />
-      <workItem from="1677596535117" duration="5931000" />
+      <workItem from="1677596535117" duration="7152000" />
     </task>
+    <task id="LOCAL-00001" summary="added sample images">
+      <created>1677603181092</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1677603181092</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added sample images" />
+    <option name="LAST_COMMIT_MESSAGE" value="added sample images" />
   </component>
 </project>
