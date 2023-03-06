@@ -62,7 +62,7 @@
       <workItem from="1677596535117" duration="7152000" />
       <workItem from="1677860547225" duration="1745000" />
       <workItem from="1677871618641" duration="47000" />
-      <workItem from="1678119796440" duration="2382000" />
+      <workItem from="1678119796440" duration="2448000" />
     </task>
     <task id="LOCAL-00001" summary="added sample images">
       <created>1677603181092</created>
@@ -85,7 +85,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677861027661</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added edge 2 removal to complete profile extraction">
+      <created>1678132806630</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678132806630</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -95,6 +102,7 @@
     <MESSAGE value="added sample images" />
     <MESSAGE value="added cropped image" />
     <MESSAGE value="added cropped images" />
-    <option name="LAST_COMMIT_MESSAGE" value="added cropped images" />
+    <MESSAGE value="added edge 2 removal to complete profile extraction" />
+    <option name="LAST_COMMIT_MESSAGE" value="added edge 2 removal to complete profile extraction" />
   </component>
 </project>
