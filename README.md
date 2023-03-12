@@ -2,6 +2,13 @@
 A Jupyter Notebook implementation of the Canny Edge detector that extracts 
 the profile of pendant drop images. 
 
+## Usage
+```
+
+```
+Upload Pendant Drop Images as PNG to the Pendant Drop subdirectory
+
+
 ## Smoothing (Gaussian blur)
 To reduce the image noise, a guassian filter is applied to every pixel in the image.
 The function acts as a filter, blurring the edges and reducing the contrast between adjacent pixels.
