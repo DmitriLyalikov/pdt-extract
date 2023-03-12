@@ -16,9 +16,9 @@ import PIL.ImageOps
 
 
 class DropProfile:
-    def __init__(self, path="pendant_drops"):
+    def __init__(self, path="Pendant Drops"):
         self.path = path
-        self.destination = "drop_profiles"
+        self.destination = "Drop Profiles"
 
     def extract_from_dir(self):
         print(os.getcwd())
