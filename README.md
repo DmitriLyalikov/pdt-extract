@@ -7,6 +7,7 @@ the profile of pendant drop images.
 ```
 git clone https://github.com/DmitriLyalikov/Canny-Edge-Detector-master.git
 ```
+Navigate to root directory where this project was stored locally
 
 * Upload Pendant Drop Images as PNG to the Pendant Drop subdirectory
 ```
