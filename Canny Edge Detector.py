@@ -3,7 +3,7 @@ Author: Dmitri Lyalikov-Dlyalikov01@manhattan.edu
 
 Canny Edge Detection Processing Script
 This script will process all image files from the folder: pendant_drops
-and output the extracted drop profile to the subdirectory: drop_profiles
+and output the extracted canny generated drop profile to the subdirectory: drop_profiles
 """
 
 import imageio
@@ -52,7 +52,7 @@ def extract_profile_from_image(image):
     mag = normalize(np.hypot(dx, dy))
     gradient = np.degrees(np.arctan2(dy, dx))
     nms = normalize(nms_with_interpol(mag, gradient, dx, dy))
-    profile = hysterisis_threshold(nms)
+    profile = hysteresis_threshold(nms)
     return profile
 
 
@@ -65,7 +65,7 @@ def show_image(img):
 # img: passed in as full directory
 def load_convert_image(img: str, sigma_val=1.2):
     lion = imageio.v2.imread(img, None)
-    lion_gray = np.dot(lion[...,:3], [0.299, 0.587, 0.114])
+    lion_gray = np.dot(lion[..., :3], [0.299, 0.587, 0.114])
     # Optionally change or take parameter for sigma
     img = ndimage.gaussian_filter(lion_gray, sigma=sigma_val)
     return img
@@ -81,87 +81,89 @@ def normalize(img):
 # Do Non-Maximum Suppression with interpolation to get a better
 # Estimate of the magnitude values of the pixels in the gradient
 # Direction. This is done to get thin edges
-def nms_with_interpol(Gmag, Grad, Gx, Gy):
-    NMS = np.zeros(Gmag.shape)
+def nms_with_interpol(g_mag, grad, gx, gy):
+    nms = np.zeros(g_mag.shape)
 
-    for i in range(1, int(Gmag.shape[0]) - 1):
-        for j in range(1, int(Gmag.shape[1]) - 1):
-            if ((Grad[i, j] >= 0 and Grad[i, j] <= 45) or (Grad[i, j] < -135 and Grad[i, j] >= -180)):
-                yBot = np.array([Gmag[i, j + 1], Gmag[i + 1, j + 1]])
-                yTop = np.array([Gmag[i, j - 1], Gmag[i - 1, j - 1]])
-                x_est = np.absolute(Gy[i, j] / Gmag[i, j])
-                if (Gmag[i, j] >= ((yBot[1] - yBot[0]) * x_est + yBot[0]) and Gmag[i, j] >= (
-                        (yTop[1] - yTop[0]) * x_est + yTop[0])):
-                    NMS[i, j] = Gmag[i, j]
+    for i in range(1, int(g_mag.shape[0]) - 1):
+        for j in range(1, int(g_mag.shape[1]) - 1):
+            if grad[i, j] >= 0 and grad[i, j] <= 45 or grad[i, j] < -135 and grad[i, j] >= -180:
+                y_bot = np.array([g_mag[i, j + 1], g_mag[i + 1, j + 1]])
+                y_top = np.array([g_mag[i, j - 1], g_mag[i - 1, j - 1]])
+                x_est = np.absolute(gy[i, j] / g_mag[i, j])
+                if (g_mag[i, j] >= ((y_bot[1] - y_bot[0]) * x_est + y_bot[0]) and g_mag[i, j] >= (
+                        (y_top[1] - y_top[0]) * x_est + y_top[0])):
+                    nms[i, j] = g_mag[i, j]
                 else:
-                    NMS[i, j] = 0
-            if ((Grad[i, j] > 45 and Grad[i, j] <= 90) or (Grad[i, j] < -90 and Grad[i, j] >= -135)):
-                yBot = np.array([Gmag[i + 1, j], Gmag[i + 1, j + 1]])
-                yTop = np.array([Gmag[i - 1, j], Gmag[i - 1, j - 1]])
-                x_est = np.absolute(Gx[i, j] / Gmag[i, j])
-                if (Gmag[i, j] >= ((yBot[1] - yBot[0]) * x_est + yBot[0]) and Gmag[i, j] >= (
-                        (yTop[1] - yTop[0]) * x_est + yTop[0])):
-                    NMS[i, j] = Gmag[i, j]
+                    nms[i, j] = 0
+            if grad[i, j] > 45 and grad[i, j] <= 90 or grad[i, j] < -90 and grad[i, j] >= -135:
+                y_bot = np.array([g_mag[i + 1, j], g_mag[i + 1, j + 1]])
+                y_top = np.array([g_mag[i - 1, j], g_mag[i - 1, j - 1]])
+                x_est = np.absolute(gx[i, j] / g_mag[i, j])
+                if (g_mag[i, j] >= ((y_bot[1] - y_bot[0]) * x_est + y_bot[0]) and g_mag[i, j] >= (
+                        (y_top[1] - y_top[0]) * x_est + y_top[0])):
+                    nms[i, j] = g_mag[i, j]
                 else:
-                    NMS[i, j] = 0
-            if ((Grad[i, j] > 90 and Grad[i, j] <= 135) or (Grad[i, j] < -45 and Grad[i, j] >= -90)):
-                yBot = np.array([Gmag[i + 1, j], Gmag[i + 1, j - 1]])
-                yTop = np.array([Gmag[i - 1, j], Gmag[i - 1, j + 1]])
-                x_est = np.absolute(Gx[i, j] / Gmag[i, j])
-                if (Gmag[i, j] >= ((yBot[1] - yBot[0]) * x_est + yBot[0]) and Gmag[i, j] >= (
-                        (yTop[1] - yTop[0]) * x_est + yTop[0])):
-                    NMS[i, j] = Gmag[i, j]
+                    nms[i, j] = 0
+            if grad[i, j] > 90 and grad[i, j] <= 135 or grad[i, j] < -45 and grad[i, j] >= -90:
+                y_bot = np.array([g_mag[i + 1, j], g_mag[i + 1, j - 1]])
+                y_top = np.array([g_mag[i - 1, j], g_mag[i - 1, j + 1]])
+                x_est = np.absolute(gx[i, j] / g_mag[i, j])
+                if (g_mag[i, j] >= ((y_bot[1] - y_bot[0]) * x_est + y_bot[0]) and g_mag[i, j] >= (
+                        (y_top[1] - y_top[0]) * x_est + y_top[0])):
+                    nms[i, j] = g_mag[i, j]
                 else:
-                    NMS[i, j] = 0
-            if ((Grad[i, j] > 135 and Grad[i, j] <= 180) or (Grad[i, j] < 0 and Grad[i, j] >= -45)):
-                yBot = np.array([Gmag[i, j - 1], Gmag[i + 1, j - 1]])
-                yTop = np.array([Gmag[i, j + 1], Gmag[i - 1, j + 1]])
-                x_est = np.absolute(Gy[i, j] / Gmag[i, j])
-                if (Gmag[i, j] >= ((yBot[1] - yBot[0]) * x_est + yBot[0]) and Gmag[i, j] >= (
-                        (yTop[1] - yTop[0]) * x_est + yTop[0])):
-                    NMS[i, j] = Gmag[i, j]
+                    nms[i, j] = 0
+            if grad[i, j] > 135 and grad[i, j] <= 180 or grad[i, j] < 0 and grad[i, j] >= -45:
+                y_bot = np.array([g_mag[i, j - 1], g_mag[i + 1, j - 1]])
+                y_top = np.array([g_mag[i, j + 1], g_mag[i - 1, j + 1]])
+                x_est = np.absolute(gy[i, j] / g_mag[i, j])
+                if (g_mag[i, j] >= ((y_bot[1] - y_bot[0]) * x_est + y_bot[0]) and g_mag[i, j] >= (
+                        (y_top[1] - y_top[0]) * x_est + y_top[0])):
+                    nms[i, j] = g_mag[i, j]
                 else:
-                    NMS[i, j] = 0
+                    nms[i, j] = 0
 
-    return NMS
+    return nms
 
 
-# Double threshold Hysterisis
-def hysterisis_threshold(img, high_thresh_ratio=0.2, low_thresh_ratio=0.15):
-    highThresholdRatio = 0.2
-    lowThresholdRatio = 0.15
-    GSup = np.copy(img)
-    h = int(GSup.shape[0])
-    w = int(GSup.shape[1])
-    highThreshold = np.max(GSup) * highThresholdRatio
-    lowThreshold = highThreshold * lowThresholdRatio
+# Double threshold Hysteresis
+def hysteresis_threshold(img, high_threshold_ratio=0.2, low_threshold_ratio=0.15):
+    high_threshold_ratio = 0.2
+    low_threshold_ratio = 0.15
+    g_sup = np.copy(img)
+    h = int(g_sup.shape[0])
+    w = int(g_sup.shape[1])
+    high_threshold = np.max(g_sup) * high_threshold_ratio
+    low_threshold = high_threshold * low_threshold_ratio
     x = 0.1
-    oldx = 0
+    old_x = 0
 
-    # The while loop is used so that the loop will keep executing till the number of strong edges do not change, i.e all weak edges connected to strong edges have been found
-    while (oldx != x):
-        oldx = x
+    # The while loop is used so that the loop will keep executing till the number of strong edges
+    # do not change, i.e. all weak edges connected to strong edges have been found
+    while old_x != x:
+        old_x = x
         for i in range(1, h - 1):
             for j in range(1, w - 1):
-                if (GSup[i, j] > highThreshold):
-                    GSup[i, j] = 1
-                elif (GSup[i, j] < lowThreshold):
-                    GSup[i, j] = 0
+                if g_sup[i, j] > high_threshold:
+                    g_sup[i, j] = 1
+                elif g_sup[i, j] < low_threshold:
+                    g_sup[i, j] = 0
                 else:
-                    if ((GSup[i - 1, j - 1] > highThreshold) or
-                            (GSup[i - 1, j] > highThreshold) or
-                            (GSup[i - 1, j + 1] > highThreshold) or
-                            (GSup[i, j - 1] > highThreshold) or
-                            (GSup[i, j + 1] > highThreshold) or
-                            (GSup[i + 1, j - 1] > highThreshold) or
-                            (GSup[i + 1, j] > highThreshold) or
-                            (GSup[i + 1, j + 1] > highThreshold)):
-                        GSup[i, j] = 1
-        x = np.sum(GSup == 1)
+                    if ((g_sup[i - 1, j - 1] > high_threshold) or
+                            (g_sup[i - 1, j] > high_threshold) or
+                            (g_sup[i - 1, j + 1] > high_threshold) or
+                            (g_sup[i, j - 1] > high_threshold) or
+                            (g_sup[i, j + 1] > high_threshold) or
+                            (g_sup[i + 1, j - 1] > high_threshold) or
+                            (g_sup[i + 1, j] > high_threshold) or
+                            (g_sup[i + 1, j + 1] > high_threshold)):
+                        g_sup[i, j] = 1
+        x = np.sum(g_sup == 1)
 
-    GSup = (GSup == 1) * GSup  # This is done to remove/clean all the weak edges which are not connected to strong edges
+    # This is done to remove/clean all the weak edges which are not connected to strong edges
+    g_sup = (g_sup == 1) * g_sup
 
-    return GSup
+    return g_sup
 
 
 # Remove connected edges that are noise
@@ -172,7 +174,6 @@ def extract_profile(img):
     # Remove all features that are not labeled 1 or 0, (profile or background)
     img[labeled_image == 2] = 0
     img[labeled_image == 1] = 255
-    #show_image(labeled_image)
     return img
 
 

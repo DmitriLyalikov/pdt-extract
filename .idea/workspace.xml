@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="" />
+    <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Canny Edge Detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/Canny Edge Detector.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,7 +128,7 @@
       <workItem from="1678553574744" duration="19564000" />
       <workItem from="1678589800195" duration="1597000" />
       <workItem from="1678645595138" duration="717000" />
-      <workItem from="1678804442687" duration="298000" />
+      <workItem from="1678804442687" duration="1381000" />
     </task>
     <task id="LOCAL-00001" summary="added sample images">
       <created>1677603181092</created>
@@ -197,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678804719185</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="removed dead code">
+      <created>1678804940105</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1678804940105</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,19 +224,8 @@
     <MESSAGE value="removed dead code" />
     <option name="LAST_COMMIT_MESSAGE" value="removed dead code" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/test.py</url>
-          <line>13</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Canny_Edge_Detector_master$test.coverage" NAME="test Coverage Results" MODIFIED="1678572546559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Canny_Edge_Detector_master$Canny_Edge_Detector.coverage" NAME="Canny Edge Detector Coverage Results" MODIFIED="1678804696123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Canny_Edge_Detector_master$Canny_Edge_Detector.coverage" NAME="Canny Edge Detector Coverage Results" MODIFIED="1678805820860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
