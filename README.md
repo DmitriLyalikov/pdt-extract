@@ -2,6 +2,18 @@
 A Jupyter Notebook implementation of the Canny Edge detector that extracts 
 the profile of pendant drop images. 
 
+## Usage
+* Download and extract .zip file or:
+```
+git clone https://github.com/DmitriLyalikov/Canny-Edge-Detector-master.git
+```
+
+* Upload Pendant Drop Images as PNG to the Pendant Drop subdirectory
+```
+python Canny Edge Detector.py
+```
+This will output the extracted profiles to the subdirectory Drop Profiles for each image
+
 ## Smoothing (Gaussian blur)
 To reduce the image noise, a guassian filter is applied to every pixel in the image.
 The function acts as a filter, blurring the edges and reducing the contrast between adjacent pixels.
