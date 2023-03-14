@@ -11,8 +11,6 @@ import os
 from scipy import ndimage
 import numpy as np
 import matplotlib.pyplot as plt
-from PIL import Image
-import PIL.ImageOps
 
 
 class DropProfile:
@@ -24,7 +22,7 @@ class DropProfile:
         print(os.getcwd())
         os.chdir(self.path)
         for filename in os.listdir():
-            if os.path.isdir(filename) == False:
+            if not os.path.isdir(filename):
                 print(f"Extracting profile from: {filename}...")
                 profile = extract_profile_from_image(os.path.join(filename))
                 os.chdir(self.destination)
@@ -35,30 +33,27 @@ class DropProfile:
 
         print(f"Done Extracting Profiles")
 
+
 # label connected components as edge profiles
 def get_profile(final_image, filename):
     labeled_image, num_features = ndimage.label(final_image)
     # Remove feature 2 which is the internal noise from light
     final_image[labeled_image == 2] = 0
     final_image[labeled_image == 1] = 255
-    plt.imshow(final_image, cmap = plt.get_cmap('gray'))
+    plt.imshow(final_image, cmap=plt.get_cmap('gray'))
     plt.show()
     imageio.imwrite(filename, np.uint8(final_image))
+
+
 def extract_profile_from_image(image):
     img = load_convert_image(image)
-    gx = normalize(sobel_filter(img, 'x'))
-    gy = normalize(sobel_filter(img, 'y'))
     dx = ndimage.sobel(img, axis=1)  # horizontal derivative
     dy = ndimage.sobel(img, axis=0)  # vertical derivative
-    Mag = normalize(np.hypot(dx, dy))
-    Gradient = np.degrees(np.arctan2(dy, dx))
-    NMS = normalize(nms_with_interpol(Mag, Gradient, dx, dy))
-    fa = hysterisis_threshold(NMS)
-    mag = normalize(np.hypot(gx, gy))
-    gradient = np.degrees(np.arctan2(gy, gx))
-    nms = normalize(nms_with_interpol(mag, gradient, gx, gy))
-    img = hysterisis_threshold(nms)
-    return fa
+    mag = normalize(np.hypot(dx, dy))
+    gradient = np.degrees(np.arctan2(dy, dx))
+    nms = normalize(nms_with_interpol(mag, gradient, dx, dy))
+    profile = hysterisis_threshold(nms)
+    return profile
 
 
 def show_image(img):
@@ -75,22 +70,6 @@ def load_convert_image(img: str, sigma_val=1.2):
     img = ndimage.gaussian_filter(lion_gray, sigma=sigma_val)
     return img
 
-
-# Apply Sobel Filter using convolution operation
-# Note that in this case I have used the filter to have a maximum magnitude of 2
-# It can also be changed to other numbers for aggressive edge extraction
-# For eg [-1, 0, 1], [-5, 0, 5], [-1, 0, 1]
-def sobel_filter(img, direction):
-    if (direction == 'x'):
-        Gx = np.array([[-1, 0, +1], [-2, 0, +2], [-1, 0, +1]])
-        Res = ndimage.convolve(img, Gx)
-        # Res = ndimage.convolve(img, Gx, mode='constant', cval=0.0)
-    if (direction == 'y'):
-        Gy = np.array([[-1, -2, -1], [0, 0, 0], [+1, +2, +1]])
-        Res = ndimage.convolve(img, Gy)
-        # Res = ndimage.convolve(img, Gy, mode='constant', cval=0.0)
-
-    return Res
 
 # Normalize the pixel array, so that values are <= 1
 def normalize(img):
