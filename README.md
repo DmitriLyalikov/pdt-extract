@@ -10,7 +10,9 @@ git clone https://github.com/DmitriLyalikov/Canny-Edge-Detector-master.git
 Navigate to root directory where this project was stored locally
 
 * Upload Pendant Drop Images as PNG to the Pendant Drop subdirectory
+
 ```
+pip install -e .
 python Canny Edge Detector.py
 ```
 This will output the extracted profiles to the subdirectory Drop Profiles for each image
