@@ -1,0 +1,5 @@
+Canny_Edge_Detector.egg-info/PKG-INFO
+Canny_Edge_Detector.egg-info/SOURCES.txt
+Canny_Edge_Detector.egg-info/dependency_links.txt
+Canny_Edge_Detector.egg-info/requires.txt
+Canny_Edge_Detector.egg-info/top_level.txt

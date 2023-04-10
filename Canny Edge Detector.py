@@ -9,7 +9,9 @@ and output the extracted canny generated drop profile to the subdirectory: drop_
 import imageio
 import os
 from scipy import ndimage
+from skimage import transform
 import numpy as np
+from numpy import fft
 import matplotlib.pyplot as plt
 
 
@@ -17,6 +19,8 @@ class DropProfile:
     def __init__(self, path="Pendant Drops"):
         self.path = path
         self.destination = "Drop Profiles"
+        self.max_height = 0
+        self.max_width = 0
 
     def extract_from_dir(self):
         print(os.getcwd())
@@ -40,8 +44,12 @@ def get_profile(final_image, filename):
     # Remove feature 2 which is the internal noise from light
     final_image[labeled_image == 2] = 0
     final_image[labeled_image == 1] = 255
-    plt.imshow(final_image, cmap=plt.get_cmap('gray'))
-    plt.show()
+    #plt.imshow(final_image, cmap=plt.get_cmap('gray'))
+    show_image(final_image)
+    final_image = split_profile(final_image)
+    show_image(final_image)
+    # plt.show()
+    fft_profile(final_image)
     imageio.imwrite(filename, np.uint8(final_image))
 
 
@@ -54,6 +62,36 @@ def extract_profile_from_image(image):
     nms = normalize(nms_with_interpol(mag, gradient, dx, dy))
     profile = hysteresis_threshold(nms)
     return profile
+
+
+# We have a grayscale ndarray.
+# We want to find the vertically-lowest pixel that has the value 255.
+# When we find that column, before cutting the image and keeping the right side,
+# we need to make sure it is either the only vertical minimum,
+# or find the midpoint between the furthest away vertical minimum column and split the image at that midpoint instead
+def split_profile(img):
+    # Find the indices of all pixels with value 255 along the vertical axis
+    indices = np.where(img == 255)[0]
+
+    # Find the lowest index, which corresponds to the lowest pixel in the image with value 255
+    lowest_index = np.min(indices)
+
+    # Find the columns that have this lowest pixel value
+    cols = np.where(img[lowest_index, :] == 255)[0]
+
+    # If there is only one such column, use it as the cutting point
+    if len(cols) == 1:
+        cutting_point = cols[0]
+
+    # Otherwise, find the midpoint between the furthest away vertical minimum columns
+    else:
+        left_col = cols[0]
+        right_col = cols[-1]
+        midpoint = (left_col + right_col) // 2
+        cutting_point = midpoint
+
+    # Cut the image and keep the right side
+    return img[:, cutting_point:]
 
 
 def show_image(img):
@@ -175,6 +213,23 @@ def extract_profile(img):
     img[labeled_image == 2] = 0
     img[labeled_image == 1] = 255
     return img
+
+
+# Fast Fourier Transform of edge profile
+# Can expect high frequency components in magnitude spectrum of edges
+# Computed in Decibels
+def fft_profile(profile):
+    fft_image = fft.fft2(profile)
+    fft_image = fft.fftshift(fft_image)
+    # Shift the zero-frequency component to the center of the spectrum
+    magnitude_spectrum = 20 * np.log(np.abs(fft_image))
+    phase_spectrum = np.angle(fft_image)
+
+    plt.imshow(magnitude_spectrum)
+    plt.show()
+
+    plt.imshow(phase_spectrum)
+    plt.show()
 
 
 profiles = DropProfile()
