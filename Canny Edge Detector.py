@@ -64,11 +64,13 @@ def extract_profile_from_image(image):
     return profile
 
 
-# We have a grayscale ndarray.
-# We want to find the vertically-lowest pixel that has the value 255.
-# When we find that column, before cutting the image and keeping the right side,
-# we need to make sure it is either the only vertical minimum,
-# or find the midpoint between the furthest away vertical minimum column and split the image at that midpoint instead
+'''
+ We have a grayscale ndarray.
+ We want to find the vertically-lowest pixel that has the value 255.
+ When we find that column, before cutting the image and keeping the right side,
+ we need to make sure it is either the only vertical minimum,
+ or find the midpoint between the furthest away vertical minimum column and split the image at that midpoint instead
+'''
 def split_profile(img):
     # Find the indices of all pixels with value 255 along the vertical axis
     indices = np.where(img == 255)[0]
