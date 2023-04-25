@@ -47,7 +47,8 @@ def get_profile(final_image, filename):
     #plt.imshow(final_image, cmap=plt.get_cmap('gray'))
     show_image(final_image)
     final_image = split_profile(final_image)
-    print(f"Apex_Radius (cm): {find_apex_radius(final_image, 0.15, 0.005) * (0.05/ 44)}")
+    R0 = find_apex_radius(final_image, 0.15, 0.005)
+    print(f"Apex_Radius (cm): {R0}") # 0.05 /4
     show_image(final_image)
     # plt.show()
     fft_profile(final_image)
