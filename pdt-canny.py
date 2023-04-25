@@ -1,29 +1,35 @@
 """
 Author: Dmitri Lyalikov-Dlyalikov01@manhattan.edu
 
-Canny Edge Detection Processing Script
-This script will process all image files from the folder: pendant_drops
+Canny Edge Detection Processor
+This module will process all image files from the folder: pendant_drops
 and output the extracted canny generated drop profile to the subdirectory: drop_profiles
+
+TODO: Implement Feature extraction from apex radius and:
+    - generate CSV of features from all profiles with extract_from_dir
+    - return dictionary of features {Drop Height, Capillary Radius, Rs, Re} with extract_from_file, extract_from_img
 """
 
 import imageio
 import os
 from scipy import ndimage
-from skimage import transform
+
 import numpy as np
 from numpy import fft
 import matplotlib.pyplot as plt
 from circle_fit import taubinSVD
 
+
 class DropProfile:
-    def __init__(self, path="Pendant Drops"):
+    def __init__(self, path="Pendant Drops", dest="Drop Profiles"):
         self.path = path
-        self.destination = "Drop Profiles"
+        self.destination = dest
         self.max_height = 0
         self.max_width = 0
 
+    # Perform bulk profile and feature extraction on all files in self.path
+    # generate drop profile .jpg and save to self.destination
     def extract_from_dir(self):
-        print(os.getcwd())
         os.chdir(self.path)
         for filename in os.listdir():
             if not os.path.isdir(filename):
@@ -37,40 +43,50 @@ class DropProfile:
 
         print(f"Done Extracting Profiles")
 
+    # perform extraction of profile and feature set given a path to an image with respect to self.path
+    def extract_from_file(self, fname: str) -> (ndimage, list):
+        os.chdir(self.path)
+        profile = extract_profile_from_image(os.path.join(fname))
+        return get_profile(profile)
+
+    # perform extraction of profile and feature set given a ndimage
+    def extract_from_img(self, img: ndimage) -> (ndimage, list):
+        profile = extract_profile_from_image(img, load=False, path_to_file=None)
+
 
 # label connected components as edge profiles
-def get_profile(final_image, filename):
+def get_profile(final_image, filename=None, save=True):
     labeled_image, num_features = ndimage.label(final_image)
     # Remove feature 2 which is the internal noise from light
     final_image[labeled_image == 2] = 0
     final_image[labeled_image == 1] = 255
-    #plt.imshow(final_image, cmap=plt.get_cmap('gray'))
-    show_image(final_image)
     final_image = split_profile(final_image)
     R0 = find_apex_radius(final_image, 0.15, 0.005)
-    print(f"Apex_Radius (cm): {R0}") # 0.05 /4
+    print(f"Apex_Radius (cm): {R0}")  # 0.05 /44
     show_image(final_image)
-    # plt.show()
+
     fft_profile(final_image)
-    imageio.imwrite(filename, np.uint8(final_image))
+    if save:
+        imageio.imwrite(filename, np.uint8(final_image))
+    else:
+        return final_image, {"Apex Radius": R0}
 
 
-def find_apex_radius(profile, ratio_drop_length, change_ro):
+# Use Circle fit to approximate apex radius of edge profile
+# ratio_drop_length: 1 >= float value > 0 representing number points along profile to approximate with
+# change_ro: float value representing minimum value of change in circle radius before stopping approximation
+def find_apex_radius(profile: ndimage, ratio_drop_length: float, change_ro: float) -> float:
     indices = np.where(profile == 255)
     x = np.flip(indices[1])
     y = np.flip(indices[0])
+
     num_point_ro_circlefit = round(len(x) * ratio_drop_length) + 1
 
-    #plt.plot(x, y)
-    # plt.show()
-    # I selected 10 points from apex for circle fitting
     percent_drop_ro = 0.1
     i = 0
     diff = 0
     r0 = 0
     r_0 = []
-    #print(x[:num_point_ro_circlefit])
-    #print(y[:num_point_ro_circlefit])
     while diff >= change_ro*r0 or num_point_ro_circlefit <= percent_drop_ro * len(x):
         points_ro_circlefit = np.stack((x[:num_point_ro_circlefit], y[:num_point_ro_circlefit]), axis=1)
         xc, yc, r0, sigma = taubinSVD(points_ro_circlefit)
@@ -80,12 +96,16 @@ def find_apex_radius(profile, ratio_drop_length, change_ro):
         i += 1
         num_point_ro_circlefit += 1
 
-    #print(r_0)
     return r_0[-1]
 
 
-def extract_profile_from_image(image):
-    img = load_convert_image(image)
+#    Execute the Canny Sequence on the image
+#    gaussian_blur_sigma value = 1.2
+#    high_threshold_ratio = 0.2
+#    low_threshold_ratio = 0.15
+def extract_profile_from_image(path_to_file: str, img: ndimage = None, load=True):
+    if load:
+        img = load_convert_image(path_to_file)
     dx = ndimage.sobel(img, axis=1)  # horizontal derivative
     dy = ndimage.sobel(img, axis=0)  # vertical derivative
     mag = normalize(np.hypot(dx, dy))
@@ -95,14 +115,12 @@ def extract_profile_from_image(image):
     return profile
 
 
-'''
- We have a grayscale ndarray.
- We want to find the vertically-lowest pixel that has the value 255.
- When we find that column, before cutting the image and keeping the right side,
- we need to make sure it is either the only vertical minimum,
- or find the midpoint between the furthest away vertical minimum column and split the image at that midpoint instead
-'''
-def split_profile(img):
+# We have a grayscale ndarray.
+# We want to find the vertically-lowest pixel that has the value 255.
+# When we find that column, before cutting the image and keeping the right side,
+# we need to make sure it is either the only vertical minimum,
+# or find the midpoint between the furthest away vertical minimum column and split the image at that midpoint instead
+def split_profile(img: ndimage):
     # Find the indices of all pixels with value 255 along the vertical axis
     indices = np.where(img == 255)[0]
 
@@ -144,7 +162,6 @@ def load_convert_image(img: str, sigma_val=1.2):
 
 # Normalize the pixel array, so that values are <= 1
 def normalize(img):
-    # img = np.multiply(img, 255 / np.max(img))
     img = img / np.max(img)
     return img
 
@@ -241,7 +258,6 @@ def hysteresis_threshold(img, high_threshold_ratio=0.2, low_threshold_ratio=0.15
 # Assuming edge profile is the longest edge
 def extract_profile(img):
     labeled_image, num_features = ndimage.label(img)
-    print(num_features)
     # Remove all features that are not labeled 1 or 0, (profile or background)
     img[labeled_image == 2] = 0
     img[labeled_image == 1] = 255
@@ -258,12 +274,7 @@ def fft_profile(profile):
     magnitude_spectrum = 20 * np.log(np.abs(fft_image))
     phase_spectrum = np.angle(fft_image)
 
-    plt.imshow(magnitude_spectrum)
-    plt.show()
 
-    plt.imshow(phase_spectrum)
-    plt.show()
-
-
-profiles = DropProfile()
-profiles.extract_from_dir()
+if __name__ == '__main__':
+    profiles = DropProfile()
+    profiles.extract_from_dir()

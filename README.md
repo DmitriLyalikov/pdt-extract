@@ -10,12 +10,19 @@ git clone https://github.com/DmitriLyalikov/Canny-Edge-Detector-master.git
 Navigate to root directory where this project was stored locally
 
 * Upload Pendant Drop Images as PNG to the Pendant Drop subdirectory
+This tool currently only works with .jpg images 
 
 ```
 pip install -e .
-python Canny Edge Detector.py
+python pdt-canny.py
 ```
 This will output the extracted profiles to the subdirectory Drop Profiles for each image
+
+### Usage as a package
+To use this package else where:
+```python
+from pdt_canny import DropProfile
+```
 
 ## Smoothing (Gaussian blur)
 To reduce the image noise, a guassian filter is applied to every pixel in the image.
