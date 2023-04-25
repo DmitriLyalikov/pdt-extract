@@ -13,7 +13,7 @@ from skimage import transform
 import numpy as np
 from numpy import fft
 import matplotlib.pyplot as plt
-
+from circle_fit import taubinSVD
 
 class DropProfile:
     def __init__(self, path="Pendant Drops"):
@@ -47,10 +47,33 @@ def get_profile(final_image, filename):
     #plt.imshow(final_image, cmap=plt.get_cmap('gray'))
     show_image(final_image)
     final_image = split_profile(final_image)
+    print(f"Apex_Radius (cm): {find_apex_radius(final_image, 10, 0.005)}")
     show_image(final_image)
     # plt.show()
     fft_profile(final_image)
     imageio.imwrite(filename, np.uint8(final_image))
+
+
+def find_apex_radius(profile, num_point_ro_circlefit, change_ro):
+    indices = np.where(profile == 255)
+    x = indices[1].tolist()[0: 119]
+    y = indices[0].tolist()[0: 119]
+
+    # I selected 10 points from apex for circle fitting
+    percent_drop_ro = 0.1
+    i = 0
+    diff = 0
+    r0 = 0
+    r_0 = []
+    while diff >= change_ro*r0 or num_point_ro_circlefit <= percent_drop_ro * len(x):
+        points_ro_circlefit = np.stack((x[:num_point_ro_circlefit], y[:num_point_ro_circlefit]), axis = 1)
+        xc, yc, r0, sigma = taubinSVD(points_ro_circlefit)
+        r_0.append(r0)
+        if i > 1:
+            diff = abs(r_0[i] - r_0[i-1])
+        i += 1
+        num_point_ro_circlefit += 1
+    return r_0[-1] * 0.025
 
 
 def extract_profile_from_image(image):
