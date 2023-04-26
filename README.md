@@ -27,6 +27,23 @@ This will output the extracted profiles to the subdirectory Drop Profiles for ea
 
 ### Usage as a package
 To use this package else where:
+```pycon
+pip install pdt_extract
+```
+Create a new DropProfile class and generate profiles and feature sets from images in a directory:
+```python
+from pdt_extract import DropProfile
+
+profiles = DropProfile(path="path/to/pendant/drop/images", dest="path/to/save/to")
+# Automated extraction from image directory
+profiles.extract_from_dir()
+
+# extract and save from one .png file
+profiles.extract_from_file("image_name.png")
+
+# Extract from a numpy nd.image and return as python objects for further processing
+profiles.extract_from_img(image_as_ndimage)
+```
 
 ```python
 from pdt_extract.pdt_extract import DropProfile
