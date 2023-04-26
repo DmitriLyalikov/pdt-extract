@@ -1,6 +1,6 @@
 # Canny-Edge-Detector
-A Jupyter Notebook implementation of the Canny Edge detector that extracts 
-the profile of pendant drop images. 
+This module will process all image files from the folder: pendant_drops
+and output the extracted canny generated drop profile to the subdirectory: drop_profiles
 
 ## Table of Contents
 1. [Usage](#usage)
