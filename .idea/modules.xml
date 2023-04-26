@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Canny-Edge-Detector-master.iml" filepath="$PROJECT_DIR$/.idea/Canny-Edge-Detector-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pdt-extract.iml" filepath="$PROJECT_DIR$/.idea/pdt-extract.iml" />
     </modules>
   </component>
 </project>

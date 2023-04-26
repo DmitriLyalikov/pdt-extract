@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: pdt-extract
+Version: 0.4.1
+Summary: Perform edge profile and characteristic feature extraction from images of pendant drops
+Home-page: https://github.com/DmitriLyalikov/pdt-canny-edge-detector
+Author: Dmitri Lyalikov
+Author-email: Dlyalikov01@manhattan.edu
+License: UNKNOWN
+Description: This package provides modules and automation to perform edge profile extraction and characteristic feature approximation from pendant drop images.
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
