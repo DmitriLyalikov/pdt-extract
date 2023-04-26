@@ -2,6 +2,13 @@
 A Jupyter Notebook implementation of the Canny Edge detector that extracts 
 the profile of pendant drop images. 
 
+## Table of Contents
+1. [Usage](#usage)
+2. [Profile Extraction](#Profile-Extraction)
+3. [Feature Extraction](#Feature-Extraction)
+4. [Results](#Results)
+5. [Appendix](#appendix)
+
 ## Usage
 * Download and extract .zip file or:
 ```
@@ -20,18 +27,21 @@ This will output the extracted profiles to the subdirectory Drop Profiles for ea
 
 ### Usage as a package
 To use this package else where:
-```python
-from pdt_canny import DropProfile
-```
 
-## Smoothing (Gaussian blur)
+```python
+from pdt_extract.pdt_extract import DropProfile
+```
+## Profile Extraction
+Given a raw image of a pendant drop, the profile is extracted through a series of steps, including the canny edge detection sequence, removing reflective noise,
+and splitting the image at its apex.
+### Smoothing (Gaussian blur)
 To reduce the image noise, a guassian filter is applied to every pixel in the image.
 The function acts as a filter, blurring the edges and reducing the contrast between adjacent pixels.
 The degree of blurring is controlled by the standard deviation (sigma). A larger sigma results in more blue
 
 * Currently, the best sigma values for the sample images are 1.2-1.4, this will depend on each image
 
-## Gradient Calculation (Sobel Filter)
+### Gradient Calculation (Sobel Filter)
 The sobel filter computes the gradient of the image intensity at each pixel. This 
 is a measure of how quickly the intensity of the image changes at that point, using convolution kernel
 
@@ -46,12 +56,12 @@ such as image classification, object detection, and segmentation.
 The process of normalization involves subtracting the mean pixel value from each pixel in the image and then dividing by the standard deviation 
 of the pixel values. This has the effect of centering the pixel values around zero and scaling them to have unit variance.
 
-## Calculate the Euclidean Magnitude (np.hypot())
+### Calculate the Euclidean Magnitude (np.hypot())
 After normalizing our sobel filtered image, we have a gradient map.
 The np.hypot() function will compute the euclidean magnitude and return
 an image of corresponding magnitude of the 2d vector. 
 
-## Non-Maxima Suppression 
+### Non-Maxima Suppression 
 A non-maxima suppression fucntion is used to thin out the edges, by reducing them 
 to a single pixel. 
 
@@ -74,23 +84,8 @@ This is typically done by tracing a path along the chain of weak edges until a s
 * The resulting image consists of only strong edge pixels and weak edge pixels that are connected to strong edge pixels.
 
 
-### TODO 
-Remove the central light reflection edges, this can be done 
-using a bitwise and mask. 
-
-```python
-# we need a function that can identify and distinguish between 
-# reflective edges and profile edges
-# Create a black mask with the same dimensions as the image
-mask = np.zeros((height, width), dtype=np.uint8)
-
-# Draw a white rectangle over the area to keep
-mask[top_edge:height - bottom_edge, 0:width] = 255
-
-# Apply the mask to the image
-result = cv2.bitwise_and(img, img, mask=mask)
-```
-
+## Feature Extraction
+### Circle Fit
 
 Please refer to this excellent link to better understand the algorithm : "http://justin-liang.com/tutorials/canny/"
 

@@ -37,7 +37,7 @@ class DropProfile:
                 profile = extract_profile_from_image(os.path.join(filename))
                 os.chdir(self.destination)
                 get_profile(profile, filename)
-                os.chdir("..")
+                os.chdir("../..")
             else:
                 print(f"not file: {filename}")
 
