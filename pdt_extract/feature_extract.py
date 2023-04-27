@@ -20,8 +20,10 @@ class FeatureExtract:
         self.equator_radius = 0
         self.s_radius = 0
         self.capillary_radius = self.x[-1]
-        self.drop_height = self.y[-1]
+        self.drop_height = self.y[0]
         self.equator_radius, self.s_radius = self.find_re_rs(5)
+        self.apex_radius = self.find_apex_radius()
+        print(f"Apex radius: {self.apex_radius * (0.05 / 44)}")
         print(f"Equator radius: {self.equator_radius},"
               f"S radius: {self.s_radius},"
               f"Capillary radius: {self.capillary_radius},"
@@ -49,7 +51,7 @@ class FeatureExtract:
                 else:
                     return
 
-    def find_re_rs(self, drop_height: int, n=5) -> (int, int):
+    def find_re_rs(self, n=5) -> (int, int):
         # Finding Equator Radius (Re) and Rs @ y=2Re
         """
         :param n:
@@ -69,7 +71,7 @@ class FeatureExtract:
             xc, yc, self.equator_radius, sigma = taubinSVD(points_rh_circlefit)
 
         # Find s_radius at y = 2 * equator_radius
-        if self.equator_radius < 0.5 * drop_height:
+        if self.equator_radius < 0.5 * self.drop_height:
             # res = index of y if y > 2 * equator_radius
             res = next(xx for xx, val in enumerate(self.y) if val > 2 * self.equator_radius)
             self.s_radius = self.x[res]
@@ -78,6 +80,28 @@ class FeatureExtract:
             self.s_radius = self.capillary_radius
         return self.equator_radius, self.s_radius
 
+    # Use Circle fit to approximate apex radius of edge profile
+    # ratio_drop_length: 1 >= float value > 0 representing number points along profile to approximate with
+    # change_ro: float value representing minimum value of change in circle radius before stopping approximation
+    def find_apex_radius(self, ratio_drop_length: float = 0.15, change_ro: float = .005) -> float:
+
+        num_point_ro_circlefit = round(len(self.x) * ratio_drop_length) + 1
+
+        percent_drop_ro = 0.1
+        i = 0
+        diff = 0
+        r0 = 0
+        r_0 = []
+        while diff >= change_ro*r0 or num_point_ro_circlefit <= percent_drop_ro * len(self.x):
+            points_ro_circlefit = np.stack((self.x[:num_point_ro_circlefit], self.y[:num_point_ro_circlefit]), axis=1)
+            xc, yc, r0, sigma = taubinSVD(points_ro_circlefit)
+            r_0.append(r0)
+            if i > 1:
+                diff = abs(r_0[i] - r_0[i-1])
+            i += 1
+            num_point_ro_circlefit += 1
+
+        return r_0[-1]
 
 # divide all elements R0
 

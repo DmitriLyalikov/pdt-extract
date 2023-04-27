@@ -13,6 +13,7 @@ TODO: Implement Feature extraction from apex radius and:
 import imageio
 import os
 from scipy import ndimage
+from feature_extract import FeatureExtract
 
 import numpy as np
 from numpy import fft
@@ -64,7 +65,13 @@ def get_profile(final_image, filename=None, save=True):
     final_image[labeled_image == 1] = 255
     final_image = split_profile(final_image)
     R0 = find_apex_radius(final_image, 0.15, 0.005)
-    print(f"Apex_Radius (cm): {R0}")  # 0.05 /44
+
+    indices = np.where(final_image == 255)
+    x = np.flip(indices[1])
+    y = np.flip(indices[0])
+    features = FeatureExtract(x, y)
+
+    print(f"Apex_Radius (cm): {R0 }")  # 0.05 /44
     show_image(final_image)
 
     fft_profile(final_image)
