@@ -10,11 +10,11 @@ features from images of pendant drops suspended from a capillary.
 5. [Appendix](#appendix)
 
 ## Usage
-* Upload Pendant Drop Images as PNG to the **path** subdirectory
-This tool currently only works with .jpg images. It also assumes that the images are already cropped, removing the capillary.
+* Upload pendant drop images as PNG to the **path** subdirectory
+This tool currently only works with .png images. It also assumes that the images are already cropped, removing the capillary.
 See **Pendant Drops** subdirectory for valid sample images.
 
-This will output the extracted profiles to the subdirectory Drop Profiles for each image
+This will output the extracted profiles to the subdirectory Drop Profiles or **dest** argument for each image
 
 To use this package:
 ```pycon
@@ -119,7 +119,16 @@ final_image = split_profile(drop_profile)
 
 ![img_2.png](doc_imgs%2Fimg_2.png)
 
+This image(s) are saved as .png files to **dest** directory provided to the DropProfile instance.
+
 ## Feature Extraction
+
+This tool uses the output of the profile extractor to e
+
+| Drop Height | Capillary Radius | R-S | R-e |
+|-------------|------------------|-----|-----|
+| -           | -                | -   | -   | 
+
 ### Circle Fit
 
 Please refer to this excellent link to better understand the algorithm : "http://justin-liang.com/tutorials/canny/"
