@@ -10,17 +10,16 @@ features from images of pendant drops suspended from a capillary.
 5. [Appendix](#appendix)
 
 ## Usage
+
+To install this package:
+```pycon
+pip install pdt_extract
+```
 * Upload pendant drop images as PNG to the **path** subdirectory
 This tool currently only works with .png images. It also assumes that the images are already cropped, removing the capillary.
 See **Pendant Drops** subdirectory for valid sample images.
 
-This will output the extracted profiles to the subdirectory Drop Profiles or **dest** argument for each image
-
-To use this package:
-```pycon
-pip install pdt_extract
-```
-Create a new DropProfile class and generate profiles and feature sets from images in a directory:
+Import the package and create a new DropProfile class and generate profiles and feature sets from image(s).
 ```python
 from pdt_extract import DropProfile
 
