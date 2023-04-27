@@ -17,11 +17,13 @@ class FeatureExtract:
     def __init__(self, x: list, y: list):
         self.x = x
         self.y = y
-        self.equator_radius = 0
-        self.s_radius = 0
+        print(x[0])
+        print(y[0])
+        print(x[-1])
+        print(y[-1])
         self.capillary_radius = self.x[-1]
         self.drop_height = self.y[0]
-        self.equator_radius, self.s_radius = self.find_re_rs(10)
+        self.equator_radius, self.s_radius = self.find_re_rs(3)
         self.apex_radius = self.find_apex_radius()
         self.feature_set = {
             "Apex radius": self.apex_radius,
@@ -39,6 +41,7 @@ class FeatureExtract:
         self.equator_radius, self.s_radius = Find_Re_Rs(self.x, self.y, 5, self.drop_height)  # Equatorial Radius and Rs
         print(f"Equator radius: {self.equator_radius * (0.05 / 44)},"
               f"S radius: {self.s_radius * (0.05 / 44)}")
+
     def average_x(self, i: int, n: int) -> int:
         s = 0
         for j in range(i-n, i+n+1):
