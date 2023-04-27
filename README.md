@@ -123,7 +123,7 @@ This image(s) are saved as .png files to **dest** directory provided to the Drop
 
 ## Feature Extraction
 
-This tool uses the output of the profile extractor to e
+This tool uses the final edge profile to approximate and derive the characteristic features in tabular format seen below:
 
 | Drop Height | Capillary Radius | R-S | R-e |
 |-------------|------------------|-----|-----|
