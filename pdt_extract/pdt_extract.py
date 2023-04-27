@@ -21,7 +21,7 @@ from circle_fit import taubinSVD
 
 
 class DropProfile:
-    def __init__(self, path="Pendant Drops", dest="Drop Profiles"):
+    def __init__(self, path="../Pendant Drops", dest="Drop Profiles"):
         self.path = path
         self.destination = dest
         self.max_height = 0
@@ -30,6 +30,7 @@ class DropProfile:
     # Perform bulk profile and feature extraction on all files in self.path
     # generate drop profile .jpg and save to self.destination
     def extract_from_dir(self):
+        os.chdir("../pdt_extract")
         os.chdir(self.path)
         for filename in os.listdir():
             if not os.path.isdir(filename):
@@ -37,9 +38,10 @@ class DropProfile:
                 profile = extract_profile_from_image(os.path.join(filename))
                 os.chdir(self.destination)
                 get_profile(profile, filename)
-                os.chdir("../..")
+                os.chdir("..")
             else:
                 print(f"not file: {filename}")
+        os.chdir("../pdt_extract")
 
         print(f"Done Extracting Profiles")
 
@@ -79,6 +81,8 @@ def find_apex_radius(profile: ndimage, ratio_drop_length: float, change_ro: floa
     indices = np.where(profile == 255)
     x = np.flip(indices[1])
     y = np.flip(indices[0])
+
+    np.savetxt("test_x_y_set.txt", np.column_stack((x, y)))
 
     num_point_ro_circlefit = round(len(x) * ratio_drop_length) + 1
 
