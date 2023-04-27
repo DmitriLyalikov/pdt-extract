@@ -64,50 +64,19 @@ def get_profile(final_image, filename=None, save=True):
     final_image[labeled_image == 2] = 0
     final_image[labeled_image == 1] = 255
     final_image = split_profile(final_image)
-    R0 = find_apex_radius(final_image, 0.15, 0.005)
+    # R0 = find_apex_radius(final_image, 0.15, 0.005)
 
     indices = np.where(final_image == 255)
     x = np.flip(indices[1])
     y = np.flip(indices[0])
     features = FeatureExtract(x, y)
-
-    print(f"Apex_Radius (cm): {R0 }")  # 0.05 /44
     show_image(final_image)
 
     fft_profile(final_image)
     if save:
         imageio.imwrite(filename, np.uint8(final_image))
     else:
-        return final_image, {"Apex Radius": R0}
-
-
-# Use Circle fit to approximate apex radius of edge profile
-# ratio_drop_length: 1 >= float value > 0 representing number points along profile to approximate with
-# change_ro: float value representing minimum value of change in circle radius before stopping approximation
-def find_apex_radius(profile: ndimage, ratio_drop_length: float, change_ro: float) -> float:
-    indices = np.where(profile == 255)
-    x = np.flip(indices[1])
-    y = np.flip(indices[0])
-
-    np.savetxt("test_x_y_set.txt", np.column_stack((x, y)))
-
-    num_point_ro_circlefit = round(len(x) * ratio_drop_length) + 1
-
-    percent_drop_ro = 0.1
-    i = 0
-    diff = 0
-    r0 = 0
-    r_0 = []
-    while diff >= change_ro*r0 or num_point_ro_circlefit <= percent_drop_ro * len(x):
-        points_ro_circlefit = np.stack((x[:num_point_ro_circlefit], y[:num_point_ro_circlefit]), axis=1)
-        xc, yc, r0, sigma = taubinSVD(points_ro_circlefit)
-        r_0.append(r0)
-        if i > 1:
-            diff = abs(r_0[i] - r_0[i-1])
-        i += 1
-        num_point_ro_circlefit += 1
-
-    return r_0[-1]
+        return final_image, features.feature_set
 
 
 #    Execute the Canny Sequence on the image
