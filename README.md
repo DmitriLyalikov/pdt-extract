@@ -1,6 +1,6 @@
-# Canny-Edge-Detector
-A Jupyter Notebook implementation of the Canny Edge detector that extracts 
-the profile of pendant drop images. 
+# pdt-extract
+A python implementation and library for extraction of edge profiles and characteristic 
+features from images of pendant drops suspended from a capillary.
 
 ## Table of Contents
 1. [Usage](#usage)
@@ -10,23 +10,13 @@ the profile of pendant drop images.
 5. [Appendix](#appendix)
 
 ## Usage
-* Download and extract .zip file or:
-```
-git clone https://github.com/DmitriLyalikov/Canny-Edge-Detector-master.git
-```
-Navigate to root directory where this project was stored locally
+* Upload Pendant Drop Images as PNG to the **path** subdirectory
+This tool currently only works with .jpg images. It also assumes that the images are already cropped, removing the capillary.
+See **Pendant Drops** subdirectory for valid sample images.
 
-* Upload Pendant Drop Images as PNG to the Pendant Drop subdirectory
-This tool currently only works with .jpg images 
-
-```
-pip install -e .
-python pdt-canny.py
-```
 This will output the extracted profiles to the subdirectory Drop Profiles for each image
 
-### Usage as a package
-To use this package else where:
+To use this package:
 ```pycon
 pip install pdt_extract
 ```
@@ -45,9 +35,6 @@ profiles.extract_from_file("image_name.png")
 profiles.extract_from_img(image_as_ndimage)
 ```
 
-```python
-from pdt_extract.pdt_extract import DropProfile
-```
 ## Profile Extraction
 Given a raw image of a pendant drop, the profile is extracted through a series of steps, including the canny edge detection sequence, removing reflective noise,
 and splitting the image at its apex.
@@ -87,7 +74,7 @@ to a single pixel.
 of its neighbors along the gradient direction
 * If the magnitude is greater than the magnitude of its two neighbors, it is retained as an edge
 
-## Double Hysterisis Thresholding
+### Double Hysterisis Thresholding
 Two thresholds are used to classify pixels as strong, weak, or non edges. The thresholds
 are typically chosesn to be a high threshold and a low threshold, where the high threshold is greater.
 
@@ -100,6 +87,19 @@ Pixels with magnitudes less than the high threshold but greater than or equal to
 This is typically done by tracing a path along the chain of weak edges until a strong edge is encountered.
 * The resulting image consists of only strong edge pixels and weak edge pixels that are connected to strong edge pixels.
 
+*Example output of canny sequence:*
+![img.png](img.png)
+
+### Reflective Noise Removal
+The smaller internal edge is detected from the reflected light of the pendant drop when
+the image is taken. Since this edge is connected and assumed to be always smaller than the edge profile, the smaller edge is isolated and filterd out:
+```python
+    labeled_image, num_features = ndimage.label(final_image)
+    # Remove feature 2 which is the internal noise from light
+    final_image[labeled_image == 2] = 0
+```
+*Example output of noise removal:*
+![img_1.png](img_1.png)
 
 ## Feature Extraction
 ### Circle Fit
