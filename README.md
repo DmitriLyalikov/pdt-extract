@@ -88,6 +88,8 @@ This is typically done by tracing a path along the chain of weak edges until a s
 * The resulting image consists of only strong edge pixels and weak edge pixels that are connected to strong edge pixels.
 
 *Example output of canny sequence:*
+
+
 ![img.png](img.png)
 
 ### Reflective Noise Removal
@@ -99,6 +101,8 @@ the image is taken. Since this edge is connected and assumed to be always smalle
     final_image[labeled_image == 2] = 0
 ```
 *Example output of noise removal:*
+
+
 ![img_1.png](img_1.png)
 
 ## Feature Extraction
