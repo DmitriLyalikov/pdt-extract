@@ -37,6 +37,11 @@ profiles.extract_from_img(image_as_ndimage)
 ## Profile Extraction
 Given a raw image of a pendant drop, the profile is extracted through a series of steps, including the canny edge detection sequence, removing reflective noise,
 and splitting the image at its apex.
+
+*Example input image:*
+
+![d-0-55.png](doc_imgs%2Fd-0-55.png)
+
 ### Smoothing (Gaussian blur)
 To reduce the image noise, a guassian filter is applied to every pixel in the image.
 The function acts as a filter, blurring the edges and reducing the contrast between adjacent pixels.
@@ -93,7 +98,7 @@ This is typically done by tracing a path along the chain of weak edges until a s
 
 ### Reflective Noise Removal
 The smaller internal edge is detected from the reflected light of the pendant drop when
-the image is taken. Since this edge is connected and assumed to be always smaller than the edge profile, the smaller edge is isolated and filterd out:
+the image is taken. Since this edge is connected and assumed to be always smaller than the edge profile, the smaller edge is isolated and filtered out:
 ```python
     labeled_image, num_features = ndimage.label(final_image)
     # Remove feature 2 which is the internal noise from light
