@@ -21,25 +21,25 @@ class FeatureExtract:
         self.s_radius = 0
         self.capillary_radius = self.x[-1]
         self.drop_height = self.y[0]
-        self.equator_radius, self.s_radius = self.find_re_rs(5)
+        self.equator_radius, self.s_radius = self.find_re_rs(10)
         self.apex_radius = self.find_apex_radius()
         print(f"Apex radius: {self.apex_radius * (0.05 / 44)}")
-        print(f"Equator radius: {self.equator_radius},"
-              f"S radius: {self.s_radius},"
-              f"Capillary radius: {self.capillary_radius},"
-              f"Drop Height: {self.drop_height}")
+        print(f"Equator radius: {self.equator_radius * (0.05 / 44)},"
+              f"S radius: {self.s_radius * (0.05 / 44)},"
+              f"Capillary radius: {self.capillary_radius * (0.05 / 44)},"
+              f"Drop Height: {self.drop_height * (0.05 / 44)}")
 
     def average_x(self, i: int, n: int) -> int:
         s = 0
         for j in range(i-n, i+n+1):
             s = s + self.x[j]
-            return s / (2 * n + 1)
+        return s / (2 * n + 1)
 
     def recursive_equator_radius(self, i, n):
         # use recursive approach: start from apex, continue until x decreases
         # at i-th point we average x of x-n to x+n to suppress noise
         # compare x-i_th vs x_i+t_th until it decreases to find equator
-        if self.average_x(i, n) < self.average_x(i+1, n) and i <= (len(self.x) - n-3):
+        if self.average_x(i, n) < self.average_x(i+1, n) and i <= len(self.x) - n-3:
             i += 1
             output = self.recursive_equator_radius(i, n)
             if output is not None:
@@ -51,7 +51,7 @@ class FeatureExtract:
                 else:
                     return
 
-    def find_re_rs(self, n=5) -> (int, int):
+    def find_re_rs(self, n=20) -> (int, int):
         # Finding Equator Radius (Re) and Rs @ y=2Re
         """
         :param n:
@@ -60,7 +60,7 @@ class FeatureExtract:
         i = n
         # A recursive function that returns equator radius
         self.recursive_equator_radius(i, n)
-        if self.equator_radius is 0:
+        if self.equator_radius == 0:
             # equator radius is 0: drop is not well-deformed: Beta>0.7
             # find equator radius from circle fitting
             # select 40% of the total number of points for circle fitting
