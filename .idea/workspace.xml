@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdt_extract/feature_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/feature_extract.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Canny Edge Detector.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Canny Edge Detector.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +206,7 @@
       <workItem from="1682474433879" duration="296000" />
       <workItem from="1682474992117" duration="1633000" />
       <workItem from="1682476667315" duration="20829000" />
-      <workItem from="1682629763534" duration="704000" />
+      <workItem from="1682629763534" duration="1124000" />
     </task>
     <task id="LOCAL-00001" summary="added sample images">
       <created>1677603181092</created>
@@ -468,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682628537564</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="work on pdt-feature extract">
+      <created>1682630480206</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1682630480206</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
