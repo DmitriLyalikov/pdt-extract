@@ -105,6 +105,15 @@ the image is taken. Since this edge is connected and assumed to be always smalle
 
 ![img_1.png](doc_imgs/img_1.png)
 
+
+### Split Image at Apex
+Since the profile of a pendant drop has an axis of symmetry at the apex (lowest point of the profile),
+it simplifies extraction to split the image at this point. 
+*Final Ouput of Profile Extraction*
+
+
+![img.png](doc_imgs/final_img.png)
+
 ## Feature Extraction
 ### Circle Fit
 
