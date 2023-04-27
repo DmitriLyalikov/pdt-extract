@@ -90,7 +90,7 @@ This is typically done by tracing a path along the chain of weak edges until a s
 *Example output of canny sequence:*
 
 
-![img.png](img.png)
+![img.png](doc_imgs/img.png)
 
 ### Reflective Noise Removal
 The smaller internal edge is detected from the reflected light of the pendant drop when
@@ -103,7 +103,7 @@ the image is taken. Since this edge is connected and assumed to be always smalle
 *Example output of noise removal:*
 
 
-![img_1.png](img_1.png)
+![img_1.png](doc_imgs/img_1.png)
 
 ## Feature Extraction
 ### Circle Fit
