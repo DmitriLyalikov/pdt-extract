@@ -5,9 +5,6 @@ Canny Edge Detection Processor
 This module will process all image files from the folder: pendant_drops
 and output the extracted canny generated drop profile to the subdirectory: drop_profiles
 
-TODO: Implement Feature extraction from apex radius and:
-    - generate CSV of features from all profiles with extract_from_dir
-    - return dictionary of features {Drop Height, Capillary Radius, Rs, Re} with extract_from_file, extract_from_img
 """
 
 import imageio
@@ -19,11 +16,15 @@ import numpy as np
 from numpy import fft
 import matplotlib.pyplot as plt
 import pandas as pd
-from circle_fit import taubinSVD
 
 
 class DropProfile:
-    def __init__(self, path="../Pendant Drops", dest="Drop Profiles", feature_set="features.csv"):
+    def __init__(self, path: str = "../Pendant Drops", dest: str = "Drop Profiles", feature_set: str = "features.csv"):
+        """
+        :param path: poth to directory to access input images.
+        :param dest: path to subdir to save output images. It is assumed destination dir is a subdirectory in path: (path/dest)
+        :param feature_set: file name to save feature set as csv to (should include .csv)
+        """
         self.path = path
         self.destination = dest
         self.feature_set = feature_set
@@ -51,7 +52,6 @@ class DropProfile:
 
         print(f"Done Extracting Profiles")
 
-
     # perform extraction of profile and feature set given a path to an image with respect to self.path
     def extract_from_file(self, fname: str) -> (ndimage, list):
         os.chdir(self.path)
@@ -62,7 +62,6 @@ class DropProfile:
     def extract_from_img(self, img: ndimage) -> (ndimage, list):
         profile = extract_profile_from_image(img, load=False, path_to_file=None)
 
-
     # label connected components as edge profiles
     def get_profile(self, final_image, filename=None, save=True):
         labeled_image, num_features = ndimage.label(final_image)
@@ -70,11 +69,12 @@ class DropProfile:
         final_image[labeled_image == 2] = 0
         final_image[labeled_image == 1] = 255
         final_image = split_profile(final_image)
-        # R0 = find_apex_radius(final_image, 0.15, 0.005)
 
+        # Create ordered set of X and Y coordinates along edge profile
         indices = np.where(final_image == 255)
         x = np.flip(indices[1])
         y = np.flip(indices[0])
+        # Extract and save profile features to feature list
         features = FeatureExtract(x, y)
         features.feature_set["image"] = filename
         self.feature_list.append(features.feature_set)
