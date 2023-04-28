@@ -129,12 +129,14 @@ final_image = split_profile(drop_profile)
 This image(s) are saved as .png files to **dest** directory provided to the DropProfile instance.
 
 ## Feature Extraction
+Feature extraction is implemented in feature_extract.py in the FeatureExtract class. Given an
+ordered set of x and y coordinates from the edge profile taken in the [Profile Extraction](#Profile-Extraction) process, it will: 
 
-This tool uses the final edge profile to approximate and derive the characteristic features in tabular format seen below:
+* Use the final edge profile to approximate and derive the characteristic features in tabular format seen below:
 
-| Drop Height | Capillary Radius | R-S | R-e |
-|-------------|------------------|-----|-----|
-| -           | -                | -   | -   | 
+| Drop Height | Capillary Radius | R-S | R-e | Apex Radius |
+|-------------|------------------|-----|-----|-------------|
+| -           | -                | -   | -   | -           |
 
 ### Circle Fit
 
