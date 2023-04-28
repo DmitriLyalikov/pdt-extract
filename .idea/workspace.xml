@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/pdt_extract/feature_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/feature_extract.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +65,8 @@
       <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\Pendant Drops" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.pdt_extract (1)">
-    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.__init__ (1)">
+    <configuration name="__init__ (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pdt-extract" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -74,12 +74,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pdt_extract" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\pdt_extract\__init__.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pdt_extract/__init__.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -164,11 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.__init__ (1)" />
         <item itemvalue="Python.pdt_extract (1)" />
         <item itemvalue="Python.feature_extract" />
         <item itemvalue="Python tests.Python tests for test-feature_extract.MyTestCase.test_something" />
         <item itemvalue="Python tests.Python tests in test-feature_extract.py" />
-        <item itemvalue="Python.__init__" />
       </list>
     </recent_temporary>
   </component>
@@ -206,14 +206,7 @@
       <workItem from="1682474433879" duration="296000" />
       <workItem from="1682474992117" duration="1633000" />
       <workItem from="1682476667315" duration="20829000" />
-      <workItem from="1682629763534" duration="14484000" />
-    </task>
-    <task id="LOCAL-00005" summary="added edge 2 removal to complete profile extraction">
-      <created>1678132853629</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1678132853630</updated>
+      <workItem from="1682629763534" duration="14547000" />
     </task>
     <task id="LOCAL-00006" summary="tested across sample images">
       <created>1678139896817</created>
@@ -551,7 +544,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682711063695</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="added new equator radius and s-radius functions">
+      <created>1682711168535</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1682711168535</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

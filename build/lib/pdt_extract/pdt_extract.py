@@ -1,45 +1,63 @@
 """
-Author: Dmitri Lyalikov-Dlyalikov01@manhattan.edu
+Author: Dmitri Lyalikov
+Email:  Dlyalikov01@manhattan.edu
+Date of last revision: 04/28/2023
 
-Canny Edge Detection Processor
-This module will process all image files from the folder: pendant_drops
-and output the extracted canny generated drop profile to the subdirectory: drop_profiles
+Status:
+    in development / validating
 
-TODO: Implement Feature extraction from apex radius and:
-    - generate CSV of features from all profiles with extract_from_dir
-    - return dictionary of features {Drop Height, Capillary Radius, Rs, Re} with extract_from_file, extract_from_img
+pdt-extract.py
+    This module is the entry point and controller of the profile and feature extraction sequence
+    implemented by the pdt-extract project.
+    It can be used as a standalone script or imported with DropProfile class to:
+        - process one or more image files from the folder: path, or from a single .png file or image (ndarray)
+        - output the extracted canny generated drop profile to the subdirectory: dest
+        - extract and generate a .csv file of characteristic features to file: dest/feature_set.csv
+
 """
 
 import imageio
 import os
 from scipy import ndimage
+from feature_extract import FeatureExtract
 
 import numpy as np
 from numpy import fft
 import matplotlib.pyplot as plt
-from circle_fit import taubinSVD
+import pandas as pd
 
 
 class DropProfile:
-    def __init__(self, path="Pendant Drops", dest="Drop Profiles"):
+    def __init__(self, path: str = "../Pendant Drops", dest: str = "Drop Profiles", feature_set: str = "features.csv"):
+        """
+        :param path: poth to directory to access input images.
+        :param dest: path to subdir to save output images. It is assumed destination dir is a subdirectory in path: (path/dest)
+        :param feature_set: file name to save feature set as csv to (should include .csv)
+        """
         self.path = path
         self.destination = dest
+        self.feature_set = feature_set
         self.max_height = 0
         self.max_width = 0
+        self.feature_list = []
 
     # Perform bulk profile and feature extraction on all files in self.path
     # generate drop profile .jpg and save to self.destination
     def extract_from_dir(self):
+        os.chdir("../pdt_extract")
         os.chdir(self.path)
         for filename in os.listdir():
             if not os.path.isdir(filename):
                 print(f"Extracting profile from: {filename}...")
                 profile = extract_profile_from_image(os.path.join(filename))
                 os.chdir(self.destination)
-                get_profile(profile, filename)
-                os.chdir("../..")
+                self.get_profile(profile, filename)
+                os.chdir("..")
             else:
                 print(f"not file: {filename}")
+        df = pd.DataFrame(self.feature_list)
+        df.to_csv(self.destination + '/' + self.feature_set, index=False)
+        os.chdir("../pdt_extract")
 
         print(f"Done Extracting Profiles")
 
@@ -47,56 +65,35 @@ class DropProfile:
     def extract_from_file(self, fname: str) -> (ndimage, list):
         os.chdir(self.path)
         profile = extract_profile_from_image(os.path.join(fname))
-        return get_profile(profile)
+        return self.get_profile(profile)
 
     # perform extraction of profile and feature set given a ndimage
     def extract_from_img(self, img: ndimage) -> (ndimage, list):
         profile = extract_profile_from_image(img, load=False, path_to_file=None)
 
+    # label connected components as edge profiles
+    def get_profile(self, final_image, filename=None, save=True):
+        labeled_image, num_features = ndimage.label(final_image)
+        # Remove feature 2 which is the internal noise from light
+        final_image[labeled_image == 2] = 0
+        final_image[labeled_image == 1] = 255
+        final_image = split_profile(final_image)
 
-# label connected components as edge profiles
-def get_profile(final_image, filename=None, save=True):
-    labeled_image, num_features = ndimage.label(final_image)
-    # Remove feature 2 which is the internal noise from light
-    final_image[labeled_image == 2] = 0
-    final_image[labeled_image == 1] = 255
-    final_image = split_profile(final_image)
-    R0 = find_apex_radius(final_image, 0.15, 0.005)
-    print(f"Apex_Radius (cm): {R0}")  # 0.05 /44
-    show_image(final_image)
+        # Create ordered set of X and Y coordinates along edge profile
+        indices = np.where(final_image == 255)
+        x = np.flip(indices[1])
+        y = np.flip(indices[0])
+        # Extract and save profile features to feature list
+        features = FeatureExtract(x, y)
+        features.feature_set["image"] = filename
+        self.feature_list.append(features.feature_set)
+        show_image(final_image)
 
-    fft_profile(final_image)
-    if save:
-        imageio.imwrite(filename, np.uint8(final_image))
-    else:
-        return final_image, {"Apex Radius": R0}
-
-
-# Use Circle fit to approximate apex radius of edge profile
-# ratio_drop_length: 1 >= float value > 0 representing number points along profile to approximate with
-# change_ro: float value representing minimum value of change in circle radius before stopping approximation
-def find_apex_radius(profile: ndimage, ratio_drop_length: float, change_ro: float) -> float:
-    indices = np.where(profile == 255)
-    x = np.flip(indices[1])
-    y = np.flip(indices[0])
-
-    num_point_ro_circlefit = round(len(x) * ratio_drop_length) + 1
-
-    percent_drop_ro = 0.1
-    i = 0
-    diff = 0
-    r0 = 0
-    r_0 = []
-    while diff >= change_ro*r0 or num_point_ro_circlefit <= percent_drop_ro * len(x):
-        points_ro_circlefit = np.stack((x[:num_point_ro_circlefit], y[:num_point_ro_circlefit]), axis=1)
-        xc, yc, r0, sigma = taubinSVD(points_ro_circlefit)
-        r_0.append(r0)
-        if i > 1:
-            diff = abs(r_0[i] - r_0[i-1])
-        i += 1
-        num_point_ro_circlefit += 1
-
-    return r_0[-1]
+        fft_profile(final_image)
+        if save:
+            imageio.imwrite(filename, np.uint8(final_image))
+        else:
+            return final_image, features.feature_set
 
 
 #    Execute the Canny Sequence on the image
