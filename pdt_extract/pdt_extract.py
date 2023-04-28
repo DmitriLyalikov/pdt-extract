@@ -1,9 +1,18 @@
 """
-Author: Dmitri Lyalikov-Dlyalikov01@manhattan.edu
+Author: Dmitri Lyalikov
+Email:  Dlyalikov01@manhattan.edu
+Date of last revision: 04/28/2023
 
-Canny Edge Detection Processor
-This module will process all image files from the folder: pendant_drops
-and output the extracted canny generated drop profile to the subdirectory: drop_profiles
+Status:
+    in development / validating
+
+pdt-extract.py
+    This module is the entry point and controller of the profile and feature extraction sequence
+    implemented by the pdt-extract project.
+    It can be used as a standalone script or imported with DropProfile class to:
+        - process one or more image files from the folder: path, or from a single .png file or image (ndarray)
+        - output the extracted canny generated drop profile to the subdirectory: dest
+        - extract and generate a .csv file of characteristic features to file: dest/feature_set.csv
 
 """
 
