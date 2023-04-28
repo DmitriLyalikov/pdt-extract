@@ -1,12 +1,22 @@
 """
-feature_extract.py
 Author: Dmitri Lyalikov
-Email: Dlyalikov01@Manhattan.edu
-Date: 4/27/2023
-These methods derive numerical profile characteristics of the pendant drop
-    - Apex Radius: Found with circle fit approximation
-    - Equator Radius
-    - Radius_S: Radius at y = 2 * (Equator Radius
+Email:  Dlyalikov01@manhattan.edu
+Date of last revision: 04/28/2023
+
+Status:
+    in development / validating
+
+feature_extract.py
+    This module performs characteristic feature extraction on the x and y coordinates of an
+    edge profile.
+    These methods derive numerical profile characteristics of the pendant drop
+        - Apex Radius: Found with circle fit approximation
+        - Equator Radius
+        - Radius_S: Radius at y = 2 * (Equator Radius
+        - Drop_Height
+        - Capillary Radius
+    By instantiating a FeatureExtract object with the x, y profile coordinates, all of these features
+    are automatically saved to a dictionary: self.feature_set as a key, value pair
 """
 
 import numpy as np
