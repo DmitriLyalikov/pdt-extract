@@ -137,5 +137,6 @@ class FeatureExtract:
         # Slice the first 70% of the list and find the maximum value
         return max(self.x[:split])
 
+    # Find radius at point X = [2 * equator_radius] between capillary and equator
     def find_s_radius(self):
         return self.x[-2 * int(self.equator_radius)]
