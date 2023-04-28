@@ -139,8 +139,7 @@ ordered set of x and y coordinates from the edge profile taken in the [Profile E
 | -           | -                | -   | -   | -           |
 
 ### Apex Radius
-#### Circle Fitting 
-
+#### Circle Fitting
 ### Normalization
 ### Equator Radius
 ### S-Radius

@@ -275,3 +275,4 @@ def fft_profile(profile):
 if __name__ == '__main__':
     profiles = DropProfile()
     profiles.extract_from_dir()
+    profiles.extract_from_file('d-0-55.png.')
