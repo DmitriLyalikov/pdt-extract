@@ -43,7 +43,7 @@ and splitting the image at its apex.
 ![d-0-55.png](doc_imgs%2Fd-0-55.png)
 
 ### Smoothing (Gaussian blur)
-To reduce the image noise, a guassian filter is applied to every pixel in the image.
+To reduce the image noise, a Gaussian filter is applied to every pixel in the image.
 The function acts as a filter, blurring the edges and reducing the contrast between adjacent pixels.
 The degree of blurring is controlled by the standard deviation (sigma). A larger sigma results in more blue
 
@@ -70,7 +70,7 @@ The np.hypot() function will compute the euclidean magnitude and return
 an image of corresponding magnitude of the 2d vector. 
 
 ### Non-Maxima Suppression 
-A non-maxima suppression fucntion is used to thin out the edges, by reducing them 
+A non-maxima suppression function is used to thin out the edges, by reducing them 
 to a single pixel. 
 
 * Compute the gradient magnitude and orientation at each pixel,
@@ -78,9 +78,9 @@ to a single pixel.
 of its neighbors along the gradient direction
 * If the magnitude is greater than the magnitude of its two neighbors, it is retained as an edge
 
-### Double Hysterisis Thresholding
+### Double Hysteresis Thresholding
 Two thresholds are used to classify pixels as strong, weak, or non edges. The thresholds
-are typically chosesn to be a high threshold and a low threshold, where the high threshold is greater.
+are typically chosen to be a high threshold and a low threshold, where the high threshold is greater.
 
 * Apply the high threshold to the gradient magnitude image to identify strong edge pixels. 
 Pixels with magnitudes greater than or equal to the high threshold are classified as strong edge pixels.
@@ -111,14 +111,14 @@ the image is taken. Since this edge is connected and assumed to be always smalle
 
 
 ### Split Image at Apex
-Since the profile of a pendant drop has an axis of symmetry at the apex (lowest point of the profile),
+Since the profile of a pendant drop has an axis of symmetry at the apex (the lowest point of the profile),
 it simplifies extraction to split the image at this point. 
 ```python
 # find apex point(s) and split image here
 final_image = split_profile(drop_profile)
 ```
 
-*Final Ouput of Profile Extraction*
+*Final Output of Profile Extraction*
 
 
 ![img_2.png](doc_imgs%2Fimg_2.png)
@@ -138,7 +138,7 @@ This tool uses the final edge profile to approximate and derive the characterist
 Please refer to this excellent link to better understand the algorithm : "http://justin-liang.com/tutorials/canny/"
 
 Important Points:
-- I have used a relatively slow iterative approach to perform the function of Double Thresholding Hysterisis,
+- I have used a relatively slow iterative approach to perform the function of Double Thresholding Hysteresis,
   a better and time-saving alternative is to use a recursive algorithm which tracks the edges.
 - The value of Sigma to implement Gaussian Blur is image specific, different values can be tested to see which give the best estimate of edges.
 - The ratio of the thresholds is again another variable, but the ones that I have used in the code give pretty good estimates for any particular image.
