@@ -35,7 +35,9 @@ class FeatureExtract:
 
         self.capillary_radius = self.x[-1]
         self.drop_height = self.y[0]
-        self.equator_radius, self.s_radius = self.find_re_rs(5)
+        # self.equator_radius, self.s_radius = self.find_re_rs(5)
+        self.equator_radius = self.find_equator_radius()
+        self.s_radius = self.find_s_radius()
         self.apex_radius = self.find_apex_radius()
         self.feature_set = {
             "Apex radius": self.apex_radius,
@@ -44,11 +46,11 @@ class FeatureExtract:
             "Capillary radius": self.capillary_radius / self.apex_radius,
             "Drop height": self.drop_height / self.apex_radius
         }
-        print(f"Apex radius: {self.apex_radius * (0.05 / 44)}")
-        print(f"Equator radius: {self.equator_radius * (0.05 / 44)},"
-              f"S radius: {self.s_radius * (0.05 / 44)},"
-              f"Capillary radius: {self.capillary_radius * (0.05 / 44)},"
-              f"Drop Height: {self.drop_height * (0.05 / 44)}")
+        print(f"Apex radius: {self.apex_radius }")
+        print(f"Equator radius: {self.equator_radius },"
+              f"S radius: {self.s_radius },"
+              f"Capillary radius: {self.capillary_radius},"
+              f"Drop Height: {self.drop_height }")
 
     def average_x(self, i: int, n: int) -> int:
         s = 0
@@ -57,6 +59,7 @@ class FeatureExtract:
         return s / (2 * n + 1)
 
     def recursive_equator_radius(self, i, n):
+        global r_e
         # use recursive approach: start from apex, continue until x decreases
         # at i-th point we average x of x-n to x+n to suppress noise
         # compare x-i_th vs x_i+t_th until it decreases to find equator
@@ -127,3 +130,13 @@ class FeatureExtract:
             num_point_ro_circlefit += 1
 
         return r_0[-1]
+
+    # Find maximum (bulge) x value from 70% of profile
+    def find_equator_radius(self):
+        split = int(len(self.x) * 0.7)
+
+        # Slice the first 70% of the list and find the maximum value
+        return max(self.x[:split])
+
+    def find_s_radius(self):
+        return self.x[-2 * int(self.equator_radius)]
