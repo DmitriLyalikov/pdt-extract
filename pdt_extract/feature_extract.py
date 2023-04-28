@@ -35,7 +35,6 @@ class FeatureExtract:
 
         self.capillary_radius = self.x[-1]
         self.drop_height = self.y[0]
-        # self.equator_radius, self.s_radius = self.find_re_rs(5)
         self.equator_radius = self.find_equator_radius()
         self.s_radius = self.find_s_radius()
         self.apex_radius = self.find_apex_radius()
