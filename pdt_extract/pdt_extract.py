@@ -23,9 +23,10 @@ from circle_fit import taubinSVD
 
 
 class DropProfile:
-    def __init__(self, path="../Pendant Drops", dest="Drop Profiles"):
+    def __init__(self, path="../Pendant Drops", dest="Drop Profiles", feature_set="features.csv"):
         self.path = path
         self.destination = dest
+        self.feature_set = feature_set
         self.max_height = 0
         self.max_width = 0
         self.feature_list = []
@@ -45,8 +46,8 @@ class DropProfile:
             else:
                 print(f"not file: {filename}")
         df = pd.DataFrame(self.feature_list)
+        df.to_csv(self.destination + '/' + self.feature_set, index=False)
         os.chdir("../pdt_extract")
-        df.to_csv('extracted_features.csv', index=False)
 
         print(f"Done Extracting Profiles")
 
