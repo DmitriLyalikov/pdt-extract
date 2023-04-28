@@ -138,7 +138,14 @@ ordered set of x and y coordinates from the edge profile taken in the [Profile E
 |-------------|------------------|-----|-----|-------------|
 | -           | -                | -   | -   | -           |
 
-### Circle Fit
+### Apex Radius
+#### Circle Fitting 
+
+### Normalization
+### Equator Radius
+### S-Radius
+### Capillary Radius
+### Drop Height
 
 Please refer to this excellent link to better understand the algorithm : "http://justin-liang.com/tutorials/canny/"
 
