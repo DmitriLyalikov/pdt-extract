@@ -17,13 +17,16 @@ pip install pdt_extract
 ```
 * Upload pendant drop images as PNG to the **path** subdirectory
 This tool currently only works with .png images. It also assumes that the images are already cropped, removing the capillary.
+* This tool also assumed the provided destination folder is a subdirectory of **path** (path/destination)
+* The feature_set csv file is also assumed to be saved here: (**path**/**dest**/**name-of-csv.csv**)
+
 See **Pendant Drops** subdirectory for valid sample images.
 
 Import the package and create a new DropProfile class and generate profiles and feature sets from image(s).
 ```python
 from pdt_extract import DropProfile
 
-profiles = DropProfile(path="path/to/pendant/drop/images", dest="path/to/save/to")
+profiles = DropProfile(path="path/to/pendant/drop/images", dest="path/to/save/to", feature_set="name-of-csv.csv")
 # Automated extraction from image directory
 profiles.extract_from_dir()
 
