@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdt_extract/feature_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/feature_extract.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdt_extract/pdt_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/pdt_extract.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +208,7 @@
       <workItem from="1682474433879" duration="296000" />
       <workItem from="1682474992117" duration="1633000" />
       <workItem from="1682476667315" duration="20829000" />
-      <workItem from="1682629763534" duration="3139000" />
+      <workItem from="1682629763534" duration="5117000" />
     </task>
     <task id="LOCAL-00001" summary="added sample images">
       <created>1677603181092</created>
@@ -489,7 +490,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682631106935</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="working commit, validated with original feature extraction code">
+      <created>1682635408222</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1682635408222</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,7 +521,8 @@
     <MESSAGE value="update docs, added functions, rename files" />
     <MESSAGE value="update docs" />
     <MESSAGE value="work on pdt-feature extract" />
-    <option name="LAST_COMMIT_MESSAGE" value="work on pdt-feature extract" />
+    <MESSAGE value="working commit, validated with original feature extraction code" />
+    <option name="LAST_COMMIT_MESSAGE" value="working commit, validated with original feature extraction code" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Canny_Edge_Detector_master$setup.coverage" NAME="setup Coverage Results" MODIFIED="1678807339216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

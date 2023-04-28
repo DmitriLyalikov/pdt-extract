@@ -9,7 +9,8 @@ setup(
         'scipy',
         'numpy',
         'matplotlib',
-        'circle_fit'
+        'circle_fit',
+        'pandas'
     ],
     classifiers=[
         'Intended Audience :: Science/Research'

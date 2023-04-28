@@ -18,6 +18,7 @@ from feature_extract import FeatureExtract
 import numpy as np
 from numpy import fft
 import matplotlib.pyplot as plt
+import pandas as pd
 from circle_fit import taubinSVD
 
 
@@ -27,6 +28,7 @@ class DropProfile:
         self.destination = dest
         self.max_height = 0
         self.max_width = 0
+        self.feature_list = []
 
     # Perform bulk profile and feature extraction on all files in self.path
     # generate drop profile .jpg and save to self.destination
@@ -38,45 +40,50 @@ class DropProfile:
                 print(f"Extracting profile from: {filename}...")
                 profile = extract_profile_from_image(os.path.join(filename))
                 os.chdir(self.destination)
-                get_profile(profile, filename)
+                self.get_profile(profile, filename)
                 os.chdir("..")
             else:
                 print(f"not file: {filename}")
+        df = pd.DataFrame(self.feature_list)
+        df.to_csv('extracted_features.csv', index=False)
         os.chdir("../pdt_extract")
 
         print(f"Done Extracting Profiles")
+
 
     # perform extraction of profile and feature set given a path to an image with respect to self.path
     def extract_from_file(self, fname: str) -> (ndimage, list):
         os.chdir(self.path)
         profile = extract_profile_from_image(os.path.join(fname))
-        return get_profile(profile)
+        return self.get_profile(profile)
 
     # perform extraction of profile and feature set given a ndimage
     def extract_from_img(self, img: ndimage) -> (ndimage, list):
         profile = extract_profile_from_image(img, load=False, path_to_file=None)
 
 
-# label connected components as edge profiles
-def get_profile(final_image, filename=None, save=True):
-    labeled_image, num_features = ndimage.label(final_image)
-    # Remove feature 2 which is the internal noise from light
-    final_image[labeled_image == 2] = 0
-    final_image[labeled_image == 1] = 255
-    final_image = split_profile(final_image)
-    # R0 = find_apex_radius(final_image, 0.15, 0.005)
+    # label connected components as edge profiles
+    def get_profile(self, final_image, filename=None, save=True):
+        labeled_image, num_features = ndimage.label(final_image)
+        # Remove feature 2 which is the internal noise from light
+        final_image[labeled_image == 2] = 0
+        final_image[labeled_image == 1] = 255
+        final_image = split_profile(final_image)
+        # R0 = find_apex_radius(final_image, 0.15, 0.005)
 
-    indices = np.where(final_image == 255)
-    x = np.flip(indices[1])
-    y = np.flip(indices[0])
-    features = FeatureExtract(x, y)
-    show_image(final_image)
+        indices = np.where(final_image == 255)
+        x = np.flip(indices[1])
+        y = np.flip(indices[0])
+        features = FeatureExtract(x, y)
+        features.feature_set["image"] = filename
+        self.feature_list.append(features.feature_set)
+        show_image(final_image)
 
-    fft_profile(final_image)
-    if save:
-        imageio.imwrite(filename, np.uint8(final_image))
-    else:
-        return final_image, features.feature_set
+        fft_profile(final_image)
+        if save:
+            imageio.imwrite(filename, np.uint8(final_image))
+        else:
+            return final_image, features.feature_set
 
 
 #    Execute the Canny Sequence on the image
