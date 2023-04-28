@@ -24,7 +24,12 @@ from circle_fit import taubinSVD
 
 
 class FeatureExtract:
-    def __init__(self, x: list, y: list):
+    def __init__(self, x: list[int], y: list[int]):
+        """
+        :param x: globally used ordered set of x coordinates of the pendant drop profile
+        :param y: globally used ordered set of x coordinates of the pendant drop profile
+        """
+
         self.x = x
         self.y = y
 
@@ -56,9 +61,9 @@ class FeatureExtract:
         # at i-th point we average x of x-n to x+n to suppress noise
         # compare x-i_th vs x_i+t_th until it decreases to find equator
         if self.average_x(i, n) < self.average_x(i+1, n) and i <= len(self.x) - n-3:
-            i = i+ 1
+            i += 1
             output = self.recursive_equator_radius(i, n)
-            if output is not None:
+            if output:
                 self.equator_radius = output
         else:
             if i <= len(self.x) * 0.7:
@@ -122,8 +127,3 @@ class FeatureExtract:
             num_point_ro_circlefit += 1
 
         return r_0[-1]
-
-# divide all elements R0
-
-
-
