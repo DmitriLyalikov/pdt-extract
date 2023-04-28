@@ -24,10 +24,10 @@ class FeatureExtract:
         self.apex_radius = self.find_apex_radius()
         self.feature_set = {
             "Apex radius": self.apex_radius,
-            "Equator radius": self.equator_radius,
-            "S_radius": self.s_radius,
-            "Capillary radius": self.capillary_radius,
-            "Drop height": self.drop_height
+            "Equator radius": self.equator_radius / self.apex_radius,
+            "S_radius": self.s_radius / self.apex_radius,
+            "Capillary radius": self.capillary_radius / self.apex_radius,
+            "Drop height": self.drop_height / self.apex_radius
         }
         print(f"Apex radius: {self.apex_radius * (0.05 / 44)}")
         print(f"Equator radius: {self.equator_radius * (0.05 / 44)},"

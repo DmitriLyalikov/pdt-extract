@@ -45,8 +45,8 @@ class DropProfile:
             else:
                 print(f"not file: {filename}")
         df = pd.DataFrame(self.feature_list)
-        df.to_csv('extracted_features.csv', index=False)
         os.chdir("../pdt_extract")
+        df.to_csv('extracted_features.csv', index=False)
 
         print(f"Done Extracting Profiles")
 
