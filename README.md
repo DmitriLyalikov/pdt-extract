@@ -179,6 +179,10 @@ self.drop_height = self.y[0]
 Drop height can be found by taking the value of the last y
 ### Normalization
 
+As mentioned, all final characteristic features are normalized by the apex radius. These values are now dimensionless 
+and independent of pixel to length ratio. 
+
+## Appendix
 Please refer to this excellent link to better understand the algorithm : "http://justin-liang.com/tutorials/canny/"
 
 Important Points:
