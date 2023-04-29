@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/doc_imgs/circle-fit.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -208,14 +206,7 @@
       <workItem from="1682474433879" duration="296000" />
       <workItem from="1682474992117" duration="1633000" />
       <workItem from="1682476667315" duration="20829000" />
-      <workItem from="1682629763534" duration="20266000" />
-    </task>
-    <task id="LOCAL-00009" summary="refactor directories">
-      <created>1678589974197</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1678589974197</updated>
+      <workItem from="1682629763534" duration="20302000" />
     </task>
     <task id="LOCAL-00010" summary="removed dead code">
       <created>1678804719185</created>
@@ -553,7 +544,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682723447942</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="update docs">
+      <created>1682729655333</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1682729655333</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

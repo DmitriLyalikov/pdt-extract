@@ -154,6 +154,7 @@ Finding the apex radius is done by maximizing a circle size along the profile. W
 the circle fit is complete and the radius is taken as apex radius.
 
 **Circle fit approximation with a pendant drop:**
+
 ![circle-fit.gif](doc_imgs%2Fcircle-fit.gif)
 ### Equator Radius
 Equator radius is the value of the maximum "bulge" radius. To work with smaller, less well-formed drop shapes where
