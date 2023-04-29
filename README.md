@@ -138,13 +138,45 @@ ordered set of x and y coordinates from the edge profile taken in the [Profile E
 |-------------|------------------|-----|-----|-------------|
 | -           | -                | -   | -   | -           |
 
+Measurements of height and radii are found in terms of pixel count, and using a normalization to the apex radius, these values become dimensionless.
+
 ### Apex Radius
+The apex radius is used as the normalization factor for all the other characteristic features of the profile.
+This value is found by using a circle fit approximation within the drop. This function can be found in **pdt-extract/feature-extract.py* called
+**find_apex_radius()**
+It takes two parameters to configure the circle fit:
+* **ratio_drop_length**: 1 >= float value > 0 representing number points along profile to approximate with
+
+* **change_ro**: float value representing minimum value of change in circle radius before stopping approximation
+It has been experimentally found that the parameters (0.15, .005) give the most accurate results.
 #### Circle Fitting
-### Normalization
+Finding the apex radius is done by maximizing a circle size along the profile. When the radius increases to less than .005 each iteration,
+the circle fit is complete and the radius is taken as apex radius.
+
+**Circle fit approximation with a pendant drop:**
+![circle-fit.gif](doc_imgs%2Fcircle-fit.gif)
 ### Equator Radius
+Equator radius is the value of the maximum "bulge" radius. To work with smaller, less well-formed drop shapes where
+the capillary radius could be larger than the equator, the equator radius is found by finding the largest x value with respect to 
+the x=0 axis on the bottom 70% of the profile:
+
 ### S-Radius
+S-Radius is found to be the radius at the X index: -(2 * pixel count of equator radius)
+This value is inverted to take the radius of this point between the capillary and equator (from the top down).
 ### Capillary Radius
+Capillary radius is the value of the x with respect to the (x=0) axis at the last (highest)
+x coordinate:
+```python
+self.capillary_radius = self.x[-1]
+```
 ### Drop Height
+Since the drop profile is centered and cropped at the apex point, the drop height
+is simply the value of the last y coordinate in the set of all points along the edge profile.
+```
+self.drop_height = self.y[0]
+```
+Drop height can be found by taking the value of the last y
+### Normalization
 
 Please refer to this excellent link to better understand the algorithm : "http://justin-liang.com/tutorials/canny/"
 

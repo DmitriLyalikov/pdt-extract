@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/doc_imgs/circle-fit.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/features.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/features.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdt_extract/feature_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/feature_extract.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdt_extract/pdt_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/pdt_extract.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,14 +208,7 @@
       <workItem from="1682474433879" duration="296000" />
       <workItem from="1682474992117" duration="1633000" />
       <workItem from="1682476667315" duration="20829000" />
-      <workItem from="1682629763534" duration="18083000" />
-    </task>
-    <task id="LOCAL-00008" summary="refactor directories">
-      <created>1678589861190</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1678589861190</updated>
+      <workItem from="1682629763534" duration="20266000" />
     </task>
     <task id="LOCAL-00009" summary="refactor directories">
       <created>1678589974197</created>
@@ -555,7 +546,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682711769651</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="update docs">
+      <created>1682723447941</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1682723447942</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
