@@ -38,17 +38,17 @@ class FeatureExtract:
         self.equator_radius = self.find_equator_radius()
         self.s_radius = self.find_s_radius()
         self.apex_radius = self.find_apex_radius()
+        # Normalize to dimensionless ratio to apex radius
         self.feature_set = {
-            "Apex radius": self.apex_radius,
-            "Equator radius": self.equator_radius / self.apex_radius,
-            "S_radius": self.s_radius / self.apex_radius,
+            "Drop height": self.drop_height / self.apex_radius,
             "Capillary radius": self.capillary_radius / self.apex_radius,
-            "Drop height": self.drop_height / self.apex_radius
+            "R-s": self.s_radius / self.apex_radius,
+            "R-e": self.equator_radius / self.apex_radius,
         }
-        print(f"Apex radius: {self.apex_radius }")
-        print(f"Equator radius: {self.equator_radius },"
-              f"S radius: {self.s_radius },"
-              f"Capillary radius: {self.capillary_radius},"
+        print(f"Apex radius (Pixels): {self.apex_radius }")
+        print(f"Equator radius: {self.equator_radius }\n"
+              f"S radius: {self.s_radius }\n"
+              f"Capillary radius: {self.capillary_radius}\n"
               f"Drop Height: {self.drop_height }")
 
     def average_x(self, i: int, n: int) -> int:
@@ -58,7 +58,6 @@ class FeatureExtract:
         return s / (2 * n + 1)
 
     def recursive_equator_radius(self, i, n):
-        global r_e
         # use recursive approach: start from apex, continue until x decreases
         # at i-th point we average x of x-n to x+n to suppress noise
         # compare x-i_th vs x_i+t_th until it decreases to find equator
@@ -134,7 +133,7 @@ class FeatureExtract:
     def find_equator_radius(self):
         split = int(len(self.x) * 0.7)
 
-        # Slice the first 70% of the list and find the maximum value
+        # Slice the first 70% of the list from bottom and find the maximum value
         return max(self.x[:split])
 
     # Find radius at point X = [2 * equator_radius] between capillary and equator

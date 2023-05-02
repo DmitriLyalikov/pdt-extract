@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='pdt-extract',
-    version='0.1.4',
+    version='0.1.5',
     packages=['pdt_extract'],
     install_requires=[
         'imageio',

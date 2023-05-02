@@ -85,7 +85,7 @@ class DropProfile:
         y = np.flip(indices[0])
         # Extract and save profile features to feature list
         features = FeatureExtract(x, y)
-        features.feature_set["image"] = filename
+        #features.feature_set["image"] = filename
         self.feature_list.append(features.feature_set)
         show_image(final_image)
 
