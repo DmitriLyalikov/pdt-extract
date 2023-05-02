@@ -12,7 +12,7 @@ pdt-extract.py
     It can be used as a standalone script or imported with DropProfile class to:
         - process one or more image files from the folder: path, or from a single .png file or image (ndarray)
         - output the extracted canny generated drop profile to the subdirectory: dest
-        - extract and generate a .csv file of characteristic features to file: dest/feature_set.csv
+        - extract and generate a .csv file of characteristic features to file: Feature Sets/feature_set.csv
 
 """
 
@@ -55,8 +55,10 @@ class DropProfile:
                 os.chdir("..")
             else:
                 print(f"not file: {filename}")
+        if not os.path.exists("Feature Sets"):
+            os.mkdir("Feature Sets")
         df = pd.DataFrame(self.feature_list)
-        df.to_csv(self.destination + '/' + self.feature_set, index=False)
+        df.to_csv("Feature Sets" + '/' + self.feature_set, index=False)
         os.chdir("../pdt_extract")
 
         print(f"Done Extracting Profiles")
