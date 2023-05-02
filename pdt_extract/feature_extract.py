@@ -50,6 +50,12 @@ class FeatureExtract:
               f"Capillary radius: {self.capillary_radius}\n"
               f"Drop Height: {self.drop_height }")
 
+    def show_features(self):
+        str_features = ""
+        for key, value in self.feature_set.items():
+            str_features += key + " " + str(value) + " "
+        return str_features
+
     def average_x(self, i: int, n: int) -> int:
         s = 0
         for j in range(i-n, i+n+1):

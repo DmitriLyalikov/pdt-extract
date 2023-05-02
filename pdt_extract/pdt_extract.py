@@ -89,6 +89,7 @@ class DropProfile:
         # features.feature_set["image"] = filename
         self.feature_list.append(features.feature_set)
         show_image(final_image)
+        print(f"{filename}: {features.show_features()}")
 
         fft_profile(final_image)
         if save:
