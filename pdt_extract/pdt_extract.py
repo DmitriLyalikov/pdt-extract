@@ -1,18 +1,17 @@
 """
-Author: Dmitri Lyalikov
-Email:  Dlyalikov01@manhattan.edu
-Date of last revision: 04/28/2023
-
-Status:
-    in development / validating
-
 pdt-extract.py
-    This module is the entry point and controller of the profile and feature extraction sequence
-    implemented by the pdt-extract project.
-    It can be used as a standalone script or imported with DropProfile class to:
-        - process one or more image files from the folder: path, or from a single .png file or image (ndarray)
-        - output the extracted canny generated drop profile to the subdirectory: dest
-        - extract and generate a .csv file of characteristic features to file: Feature Sets/feature_set.csv
+
+- Author: Dmitri Lyalikov
+- Email:  Dlyalikov01@manhattan.edu
+- Date of last revision: 05/02/2023
+- Status: in development / validating
+
+This module is the entry point and controller of the profile and feature extraction sequence
+implemented by the pdt-extract project.
+It can be used as a standalone script or imported with DropProfile class to:
+    - process one or more image files from the folder: path, or from a single .png file or image (ndarray)
+    - output the extracted canny generated drop profile to the subdirectory: dest
+    - extract and generate a .csv file of characteristic features to file: Feature Sets/feature_set.csv
 
 """
 
@@ -87,7 +86,7 @@ class DropProfile:
         y = np.flip(indices[0])
         # Extract and save profile features to feature list
         features = FeatureExtract(x, y)
-        #features.feature_set["image"] = filename
+        # features.feature_set["image"] = filename
         self.feature_list.append(features.feature_set)
         show_image(final_image)
 
