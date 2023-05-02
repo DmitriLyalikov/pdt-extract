@@ -17,8 +17,8 @@ pip install pdt_extract
 ```
 * Upload pendant drop images as PNG to the **path** subdirectory
 This tool currently only works with .png images. It also assumes that the images are already cropped, removing the capillary.
-* This tool also assumed the provided destination folder is a subdirectory of **path** (path/destination)
-* The feature_set csv file is also assumed to be saved here: (**path**/**dest**/**name-of-csv.csv**)
+* This tool requires that the provided destination folder is a subdirectory of **path** (path/destination)
+* The feature_set csv file is saved here: (**path**/**Feature Sets**/**name-of-csv.csv**)
 
 See **Pendant Drops** subdirectory for valid sample images.
 
@@ -36,17 +36,19 @@ profiles.extract_from_file("image_name.png")
 # Extract from a numpy nd.image and return as python objects for further processing
 profiles.extract_from_img(image_as_ndimage)
 ```
+This automation yields results from the drop images into two folders, with the extracted drop profile(s) in **dest** and the 
+dimensionless features of each image in tabular format in a single **feature_set** .csv file
 
 ## Profile Extraction
-Given a raw image of a pendant drop, the profile is extracted through a series of steps, including the canny edge detection sequence, removing reflective noise,
-and splitting the image at its apex.
+Given a raw image of a pendant drop, the profile is extracted through a series of steps: a canny edge detection sequence, reflective noise removal,
+and splitting the profile at its apex.
 
 *Example input image:*
 
 ![d-0-55.png](doc_imgs%2Fd-0-55.png)
 
 ### Smoothing (Gaussian blur)
-To reduce the image noise, a Gaussian filter is applied to every pixel in the image.
+To reduce the initial image noise, a Gaussian filter is applied to every pixel in the image.
 The function acts as a filter, blurring the edges and reducing the contrast between adjacent pixels.
 The degree of blurring is controlled by the standard deviation (sigma). A larger sigma results in more blue
 
