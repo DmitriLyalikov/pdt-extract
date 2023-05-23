@@ -76,7 +76,8 @@ class DropProfile:
     def get_profile(self, final_image, filename=None, save=True):
         labeled_image, num_features = ndimage.label(final_image)
         # Remove feature 2 which is the internal noise from light
-        final_image[labeled_image == 2] = 0
+        final_image[labeled_image == 2] = 255
+        final_image[labeled_image != 2] = 0
         final_image[labeled_image == 1] = 255
         final_image = split_profile(final_image)
 
@@ -86,7 +87,7 @@ class DropProfile:
         y = np.flip(indices[0])
         # Extract and save profile features to feature list
         features = FeatureExtract(x, y)
-        # features.feature_set["image"] = filename
+        features.feature_set["image"] = filename
         self.feature_list.append(features.feature_set)
         show_image(final_image)
         print(f"{filename}: {features.show_features()}")
@@ -111,6 +112,7 @@ def extract_profile_from_image(path_to_file: str, img: ndimage = None, load=True
     gradient = np.degrees(np.arctan2(dy, dx))
     nms = normalize(nms_with_interpol(mag, gradient, dx, dy))
     profile = hysteresis_threshold(nms)
+    show_image(profile)
     return profile
 
 
@@ -151,7 +153,7 @@ def show_image(img):
 
 # Load the next image in subdir
 # img: passed in as full directory
-def load_convert_image(img: str, sigma_val=1.2):
+def load_convert_image(img: str, sigma_val=1.8):
     lion = imageio.v2.imread(img, None)
     lion_gray = np.dot(lion[..., :3], [0.299, 0.587, 0.114])
     # Optionally change or take parameter for sigma
