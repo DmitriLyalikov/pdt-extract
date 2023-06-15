@@ -43,6 +43,7 @@ class FeatureExtract:
             "Capillary radius": self.capillary_radius / self.apex_radius,
             "R-s": self.s_radius / self.apex_radius,
             "R-e": self.equator_radius / self.apex_radius,
+            "Apex Radius": self.apex_radius
         }
         print(f"Apex radius (Pixels): {self.apex_radius }")
         print(f"Equator radius: {self.equator_radius }\n"

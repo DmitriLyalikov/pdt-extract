@@ -76,8 +76,9 @@ class DropProfile:
     def get_profile(self, final_image, filename=None, save=True):
         labeled_image, num_features = ndimage.label(final_image)
         # Remove feature 2 which is the internal noise from light
+        for i in range(50):
+            final_image[labeled_image == i] = 0
         final_image[labeled_image == 2] = 255
-        final_image[labeled_image != 2] = 0
         final_image[labeled_image == 1] = 255
         final_image = split_profile(final_image)
 
@@ -153,9 +154,10 @@ def show_image(img):
 
 # Load the next image in subdir
 # img: passed in as full directory
-def load_convert_image(img: str, sigma_val=1.8):
+def load_convert_image(img: str, sigma_val=1.2):
     lion = imageio.v2.imread(img, None)
     lion_gray = np.dot(lion[..., :3], [0.299, 0.587, 0.114])
+    # Find the middle row index
     # Optionally change or take parameter for sigma
     img = ndimage.gaussian_filter(lion_gray, sigma=sigma_val)
     return img
@@ -217,8 +219,8 @@ def nms_with_interpol(g_mag, grad, gx, gy):
 
 # Double threshold Hysteresis
 def hysteresis_threshold(img, high_threshold_ratio=0.2, low_threshold_ratio=0.15):
-    high_threshold_ratio = 0.2
-    low_threshold_ratio = 0.15
+    high_threshold_ratio = 0.35
+    low_threshold_ratio = 0.20
     g_sup = np.copy(img)
     h = int(g_sup.shape[0])
     w = int(g_sup.shape[1])
