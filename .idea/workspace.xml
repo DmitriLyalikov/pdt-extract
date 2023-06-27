@@ -4,117 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-1-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-2-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-2-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-3-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-3-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-4-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-4-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-5-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-5-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-6-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-6-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-7-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-7-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d-8-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.5.05 copy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.5.55 copy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.0.55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.1.05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.1.55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.2.05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.2.55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.3.05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.3.55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.4.05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.4.55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.5.05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.5.55 copy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.5.55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.6.05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.6.55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.7.05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.7.55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Old Images/d.8.05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.0.55.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.1.05.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.1.55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.1.55.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.2.05.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.2.55.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.3.05 copy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.3.05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.3.05.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.3.05t.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.3.55.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.4.05.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.4.55.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.5.05 copy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.5.05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.5.05.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.5.55.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.6.05.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.6.55.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.7.05.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.7.55.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.8.05.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-1-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-2-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-2-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-3-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-3-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-4-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-4-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-5-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-5-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-6-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-6-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-7-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-7-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-8-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-1-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-2-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-2-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-3-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-3-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-4-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-4-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-5-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-5-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-6-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-6-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-7-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-7-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-8-05.png" afterDir="false" />
+    <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="added support for preprocessed edge profiles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.0.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.0.55.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.1.05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.1.05.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.1.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.1.55.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.2.05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.2.05.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.2.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.2.55.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.3.05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/d.3.05.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pendant Drops/Feature Sets/features.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/Feature Sets/features.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.0.55.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.1.05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.1.55.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.2.05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.2.55.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.3.05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.3.55.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.4.05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.4.55.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.5.05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.6.05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.6.55.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.7.05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.7.55.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.8.05.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pdt_extract/feature_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/feature_extract.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdt_extract/pdt_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/pdt_extract.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -326,13 +219,9 @@
       <workItem from="1685456911802" duration="68000" />
       <workItem from="1686854848836" duration="7033000" />
       <workItem from="1687791563575" duration="14000" />
-    </task>
-    <task id="LOCAL-00020" summary="update docs, added functions, rename files">
-      <created>1682467082422</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1682467082422</updated>
+      <workItem from="1687868624095" duration="115000" />
+      <workItem from="1687869603618" duration="630000" />
+      <workItem from="1687901062915" duration="1710000" />
     </task>
     <task id="LOCAL-00021" summary="update docs, added functions, rename files">
       <created>1682475717160</created>
@@ -670,7 +559,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686862503160</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="added support for preprocessed edge profiles">
+      <created>1687868480976</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1687868480977</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -711,6 +607,10 @@
     <MESSAGE value="created new dist" />
     <MESSAGE value="update docs" />
     <MESSAGE value="increased low/high threshold in hyst thresholding function for consistency" />
-    <option name="LAST_COMMIT_MESSAGE" value="increased low/high threshold in hyst thresholding function for consistency" />
+    <MESSAGE value="added support for preprocessed edge profiles" />
+    <option name="LAST_COMMIT_MESSAGE" value="added support for preprocessed edge profiles" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/pdt_extract$pdt_extract__1_.coverage" NAME="pdt_extract (1) Coverage Results" MODIFIED="1687902273601" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
   </component>
 </project>

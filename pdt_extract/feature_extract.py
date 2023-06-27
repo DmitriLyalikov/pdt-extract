@@ -34,8 +34,8 @@ class FeatureExtract:
 
         self.capillary_radius = self.x[-1]
         self.drop_height = self.y[0]
-        self.equator_radius = self.find_equator_radius()
-        self.s_radius = self.find_s_radius()
+        self.equator_radius, equator_index = self.find_equator_radius()
+        self.s_radius = self.find_s_radius(equator_index)
         self.apex_radius = self.find_apex_radius()
         # Normalize to dimensionless ratio to apex radius
         self.feature_set = {
@@ -140,8 +140,9 @@ class FeatureExtract:
         split = int(len(self.x) * 0.7)
 
         # Slice the first 70% of the list from bottom and find the maximum value
-        return max(self.x[:split])
+        return max(self.x[:split]), np.argmax(self.x[:split])
 
     # Find radius at point X = [2 * equator_radius] between capillary and equator
-    def find_s_radius(self):
-        return self.x[-2 * int(self.equator_radius)]
+    def find_s_radius(self, equator_index):
+        rs_index = ((len(self.x) - equator_index) / 2) + equator_index
+        return self.x[int(rs_index)]
