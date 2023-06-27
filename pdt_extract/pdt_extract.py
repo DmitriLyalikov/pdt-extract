@@ -42,23 +42,39 @@ class DropProfile:
 
     # Perform bulk profile and feature extraction on all files in self.path
     # generate drop profile .jpg and save to self.destination
-    def extract_from_dir(self):
+    def extract_from_dir(self, canny_done=False):
         os.chdir("../pdt_extract")
         os.chdir(self.path)
-        for filename in os.listdir():
-            if not os.path.isdir(filename):
-                print(f"Extracting profile from: {filename}...")
-                profile = extract_profile_from_image(os.path.join(filename))
-                os.chdir(self.destination)
-                self.get_profile(profile, filename)
-                os.chdir("..")
-            else:
-                print(f"not file: {filename}")
-        if not os.path.exists("Feature Sets"):
-            os.mkdir("Feature Sets")
-        df = pd.DataFrame(self.feature_list)
-        df.to_csv("Feature Sets" + '/' + self.feature_set, index=False)
-        os.chdir("../pdt_extract")
+        if canny_done:
+            for filename in os.listdir():
+                if not os.path.isdir(filename):
+                    print(f"Extracting profile from: {filename}...")
+                    profile = load_edge(filename)
+                    os.chdir(self.destination)
+                    self.get_profile(profile, filename)
+                    os.chdir("..")
+                else:
+                    print(f"not file: {filename}")
+            if not os.path.exists("Feature Sets"):
+                os.mkdir("Feature Sets")
+            df = pd.DataFrame(self.feature_list)
+            df.to_csv("Feature Sets" + '/' + self.feature_set, index=False)
+            os.chdir("../pdt_extract")
+        else:
+            for filename in os.listdir():
+                if not os.path.isdir(filename):
+                    print(f"Extracting profile from: {filename}...")
+                    profile = extract_profile_from_image(os.path.join(filename))
+                    os.chdir(self.destination)
+                    self.get_profile(profile, filename)
+                    os.chdir("..")
+                else:
+                    print(f"not file: {filename}")
+            if not os.path.exists("Feature Sets"):
+                os.mkdir("Feature Sets")
+            df = pd.DataFrame(self.feature_list)
+            df.to_csv("Feature Sets" + '/' + self.feature_set, index=False)
+            os.chdir("../pdt_extract")
 
         print(f"Done Extracting Profiles")
 
@@ -76,9 +92,9 @@ class DropProfile:
     def get_profile(self, final_image, filename=None, save=True):
         labeled_image, num_features = ndimage.label(final_image)
         # Remove feature 2 which is the internal noise from light
-        for i in range(50):
-            final_image[labeled_image == i] = 0
-        final_image[labeled_image == 2] = 255
+        # for i in range(50):
+        #     final_image[labeled_image == i] = 0
+        #final_image[labeled_image == 2] =
         final_image[labeled_image == 1] = 255
         final_image = split_profile(final_image)
 
@@ -152,9 +168,18 @@ def show_image(img):
     plt.show()
 
 
+# load a preprocessed edge profile
+# img: passed in as full directory
+def load_edge(img: str) -> ndimage:
+    lion = imageio.v2.imread(img, None)
+    img = np.dot(lion[..., :3], [0.299, 0.587, 0.114])
+    show_image(img)
+    return img
+
+
 # Load the next image in subdir
 # img: passed in as full directory
-def load_convert_image(img: str, sigma_val=1.2):
+def load_convert_image(img: str, sigma_val=1):
     lion = imageio.v2.imread(img, None)
     lion_gray = np.dot(lion[..., :3], [0.299, 0.587, 0.114])
     # Find the middle row index
@@ -219,8 +244,8 @@ def nms_with_interpol(g_mag, grad, gx, gy):
 
 # Double threshold Hysteresis
 def hysteresis_threshold(img, high_threshold_ratio=0.2, low_threshold_ratio=0.15):
-    high_threshold_ratio = 0.35
-    low_threshold_ratio = 0.20
+    high_threshold_ratio = 0.4
+    low_threshold_ratio = 0.15
     g_sup = np.copy(img)
     h = int(g_sup.shape[0])
     w = int(g_sup.shape[1])
@@ -267,6 +292,7 @@ def extract_profile(img):
     return img
 
 
+
 # Fast Fourier Transform of edge profile
 # Can expect high frequency components in magnitude spectrum of edges
 # Computed in Decibels
@@ -280,4 +306,4 @@ def fft_profile(profile):
 
 if __name__ == '__main__':
     profiles = DropProfile()
-    profiles.extract_from_dir()
+    profiles.extract_from_dir(canny_done=True)
