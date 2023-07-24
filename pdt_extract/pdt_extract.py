@@ -45,13 +45,15 @@ class DropProfile:
     def extract_from_dir(self, canny_done=False, extract=True):
         os.chdir("../pdt_extract")
         os.chdir(self.path)
+        coord_list = {}
         if canny_done:
             for filename in os.listdir():
                 if not os.path.isdir(filename):
                     print(f"Extracting profile from: {filename}...")
                     profile = load_edge(filename)
                     os.chdir(self.destination)
-                    self.get_profile(profile, filename)
+                    image, features, x, y = self.get_profile(profile, filename, extract=extract)
+                    coord_list[f"{filename}"] = [x, y]
                     os.chdir("..")
                 else:
                     print(f"not file: {filename}")
@@ -66,7 +68,8 @@ class DropProfile:
                     print(f"Extracting profile from: {filename}...")
                     profile = extract_profile_from_image(os.path.join(filename))
                     os.chdir(self.destination)
-                    self.get_profile(profile, filename, extract=extract)
+                    image, features, x, y = self.get_profile(profile, filename, extract=extract)
+                    coord_list[f"{filename}"] = [x, y]
                     os.chdir("..")
                 else:
                     print(f"not file: {filename}")
@@ -77,6 +80,7 @@ class DropProfile:
             os.chdir("../pdt_extract")
 
         print(f"Done Extracting Profiles")
+        return coord_list
 
     # perform extraction of profile and feature set given a path to an image with respect to self.path
     def extract_from_file(self, fname: str, canny_done: bool, extract=True) -> (ndimage, list):
@@ -107,6 +111,8 @@ class DropProfile:
         x = np.flip(indices[1])
         y = np.flip(indices[0])
         reconstruct(x, y)
+        if save:
+            imageio.imwrite(filename, np.uint8(final_image))
         # Extract and save profile features to feature list
         if extract:
             features = FeatureExtract(x, y)
@@ -114,12 +120,10 @@ class DropProfile:
             self.feature_list.append(features.feature_set)
             show_image(final_image)
             print(f"{filename}: {features.show_features()}")
-
+            return final_image, features.feature_set, x, y
         fft_profile(final_image)
-        if save:
-            imageio.imwrite(filename, np.uint8(final_image))
-        else:
-            return final_image, features.feature_set
+
+        return final_image, None, x, y
 
 
 def reconstruct(x_coords, y_coords):
