@@ -79,10 +79,14 @@ class DropProfile:
         print(f"Done Extracting Profiles")
 
     # perform extraction of profile and feature set given a path to an image with respect to self.path
-    def extract_from_file(self, fname: str) -> (ndimage, list):
-        os.chdir(self.path)
-        profile = extract_profile_from_image(os.path.join(fname))
-        return self.get_profile(profile)
+    def extract_from_file(self, fname: str, canny_done: bool) -> (ndimage, list):
+        if canny_done:
+            profile = load_edge(fname)
+            self.get_profile(profile, fname)
+        else:
+            os.chdir(self.path)
+            profile = extract_profile_from_image(os.path.join(fname))
+            return self.get_profile(profile)
 
     # perform extraction of profile and feature set given a ndimage
     def extract_from_img(self, img: ndimage) -> (ndimage, list):
@@ -91,17 +95,24 @@ class DropProfile:
     # label connected components as edge profiles
     def get_profile(self, final_image, filename=None, save=True):
         labeled_image, num_features = ndimage.label(final_image)
+        print(num_features)
+        # show_image(labeled_image)
         # Remove feature 2 which is the internal noise from light
-        # for i in range(50):
+        #for i in range(num_features):
         #     final_image[labeled_image == i] = 0
-        #final_image[labeled_image == 2] =
         final_image[labeled_image == 1] = 255
+
+        #final_image[labeled_image == 2] =
+        #final_image[labeled_image == 1] = 255
         final_image = split_profile(final_image)
 
         # Create ordered set of X and Y coordinates along edge profile
-        indices = np.where(final_image == 255)
+        indices = np.where(final_image > 0) #
         x = np.flip(indices[1])
         y = np.flip(indices[0])
+        print(x)
+        print(y)
+        reconstruct(x, y)
         # Extract and save profile features to feature list
         features = FeatureExtract(x, y)
         features.feature_set["image"] = filename
@@ -115,6 +126,12 @@ class DropProfile:
         else:
             return final_image, features.feature_set
 
+
+def reconstruct(x_coords, y_coords):
+    image_array = np.zeros((500, 500), dtype=np.uint8)
+    for x, y in zip(x_coords, y_coords):
+        image_array[y, x] = 255
+    show_image(image_array)
 
 #    Execute the Canny Sequence on the image
 #    gaussian_blur_sigma value = 1.2
@@ -139,14 +156,20 @@ def extract_profile_from_image(path_to_file: str, img: ndimage = None, load=True
 # we need to make sure it is either the only vertical minimum,
 # or find the midpoint between the furthest away vertical minimum column and split the image at that midpoint instead
 def split_profile(img: ndimage):
+    show_image(img)
+
+    nonzero_coords = np.argwhere(img != 0)
+    lowest_position = np.min(nonzero_coords, axis=0)
+    print(lowest_position)
     # Find the indices of all pixels with value 255 along the vertical axis
-    indices = np.where(img == 255)[0]
+    indices = np.where(img > 0)[1]
 
     # Find the lowest index, which corresponds to the lowest pixel in the image with value 255
     lowest_index = np.min(indices)
 
     # Find the columns that have this lowest pixel value
-    cols = np.where(img[lowest_index, :] == 255)[0]
+    cols = np.where(img[lowest_index, :] > 0)[0]
+    print(cols)
 
     # If there is only one such column, use it as the cutting point
     if len(cols) == 1:
@@ -172,6 +195,8 @@ def show_image(img):
 # img: passed in as full directory
 def load_edge(img: str) -> ndimage:
     lion = imageio.v2.imread(img, None)
+    show_image(lion)
+    # Convert to grayscale
     img = np.dot(lion[..., :3], [0.299, 0.587, 0.114])
     show_image(img)
     return img
@@ -307,3 +332,4 @@ def fft_profile(profile):
 if __name__ == '__main__':
     profiles = DropProfile()
     profiles.extract_from_dir(canny_done=True)
+    # profiles.extract_from_file(fname="../matlab_canny/d-1-55.png", canny_done=True)
