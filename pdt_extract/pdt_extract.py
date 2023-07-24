@@ -42,7 +42,7 @@ class DropProfile:
 
     # Perform bulk profile and feature extraction on all files in self.path
     # generate drop profile .jpg and save to self.destination
-    def extract_from_dir(self, canny_done=False):
+    def extract_from_dir(self, canny_done=False, extract=True):
         os.chdir("../pdt_extract")
         os.chdir(self.path)
         if canny_done:
@@ -66,7 +66,7 @@ class DropProfile:
                     print(f"Extracting profile from: {filename}...")
                     profile = extract_profile_from_image(os.path.join(filename))
                     os.chdir(self.destination)
-                    self.get_profile(profile, filename)
+                    self.get_profile(profile, filename, extract=extract)
                     os.chdir("..")
                 else:
                     print(f"not file: {filename}")
@@ -79,46 +79,41 @@ class DropProfile:
         print(f"Done Extracting Profiles")
 
     # perform extraction of profile and feature set given a path to an image with respect to self.path
-    def extract_from_file(self, fname: str, canny_done: bool) -> (ndimage, list):
+    def extract_from_file(self, fname: str, canny_done: bool, extract=True) -> (ndimage, list):
         if canny_done:
             profile = load_edge(fname)
             self.get_profile(profile, fname)
         else:
             os.chdir(self.path)
             profile = extract_profile_from_image(os.path.join(fname))
-            return self.get_profile(profile)
+            return self.get_profile(profile, extract=extract)
 
     # perform extraction of profile and feature set given a ndimage
-    def extract_from_img(self, img: ndimage) -> (ndimage, list):
+    def extract_from_img(self, img: ndimage, extract=True) -> (ndimage, list):
         profile = extract_profile_from_image(img, load=False, path_to_file=None)
 
     # label connected components as edge profiles
-    def get_profile(self, final_image, filename=None, save=True):
+    def get_profile(self, final_image, filename=None, save=True, extract=True):
         labeled_image, num_features = ndimage.label(final_image)
-        print(num_features)
         # show_image(labeled_image)
         # Remove feature 2 which is the internal noise from light
-        #for i in range(num_features):
-        #     final_image[labeled_image == i] = 0
+
         final_image[labeled_image == 1] = 255
 
-        #final_image[labeled_image == 2] =
-        #final_image[labeled_image == 1] = 255
         final_image = split_profile(final_image)
 
         # Create ordered set of X and Y coordinates along edge profile
-        indices = np.where(final_image > 0) #
+        indices = np.where(final_image > 0)
         x = np.flip(indices[1])
         y = np.flip(indices[0])
-        print(x)
-        print(y)
         reconstruct(x, y)
         # Extract and save profile features to feature list
-        features = FeatureExtract(x, y)
-        features.feature_set["image"] = filename
-        self.feature_list.append(features.feature_set)
-        show_image(final_image)
-        print(f"{filename}: {features.show_features()}")
+        if extract:
+            features = FeatureExtract(x, y)
+            features.feature_set["image"] = filename
+            self.feature_list.append(features.feature_set)
+            show_image(final_image)
+            print(f"{filename}: {features.show_features()}")
 
         fft_profile(final_image)
         if save:
@@ -137,7 +132,7 @@ def reconstruct(x_coords, y_coords):
 #    gaussian_blur_sigma value = 1.2
 #    high_threshold_ratio = 0.2
 #    low_threshold_ratio = 0.15
-def extract_profile_from_image(path_to_file: str, img: ndimage = None, load=True):
+def extract_profile_from_image(path_to_file: str, img: ndimage = None, load=True, extract=True):
     if load:
         img = load_convert_image(path_to_file)
     dx = ndimage.sobel(img, axis=1)  # horizontal derivative
@@ -160,7 +155,6 @@ def split_profile(img: ndimage):
 
     nonzero_coords = np.argwhere(img != 0)
     lowest_position = np.min(nonzero_coords, axis=0)
-    print(lowest_position)
     # Find the indices of all pixels with value 255 along the vertical axis
     indices = np.where(img > 0)[1]
 
@@ -169,7 +163,6 @@ def split_profile(img: ndimage):
 
     # Find the columns that have this lowest pixel value
     cols = np.where(img[lowest_index, :] > 0)[0]
-    print(cols)
 
     # If there is only one such column, use it as the cutting point
     if len(cols) == 1:
@@ -331,5 +324,5 @@ def fft_profile(profile):
 
 if __name__ == '__main__':
     profiles = DropProfile()
-    profiles.extract_from_dir(canny_done=True)
+    profiles.extract_from_dir(canny_done=False, extract=False)
     # profiles.extract_from_file(fname="../matlab_canny/d-1-55.png", canny_done=True)

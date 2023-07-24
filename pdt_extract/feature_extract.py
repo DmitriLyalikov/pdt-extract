@@ -20,7 +20,7 @@ are automatically saved to a dictionary: self.feature_set as a key, value pair
 
 import numpy as np
 from circle_fit import taubinSVD
-
+import matplotlib.pyplot as plt
 
 class FeatureExtract:
     def __init__(self, x: list[int], y: list[int]):
@@ -34,11 +34,12 @@ class FeatureExtract:
 
         self.x = x
         self.y = y
-        print(len(x))
+
         self.capillary_radius = self.x[-1]
         self.drop_height = self.y[0]
         self.equator_radius, self.s_radius = self.find_re_rs()
-        self.equator_radius, self.s_radius = Find_Re_Rs(x[::-1], y[::-1], 15, self.drop_height, self.capillary_radius)
+        #self.equator_radius, self.s_radius = Find_Re_Rs(x[::-1], y[::-1], 5, self.drop_height, self.capillary_radius)
+        self.equator_radius, self.s_radius, self.re_pos, self.rs_pos = Find_Re_Rs(x[::-1], y[::-1], 15, self.drop_height, self.capillary_radius)
         # self.s_radius = self.find_s_radius(equator_index)
         self.apex_radius = self.find_apex_radius()
         #self.print_debug_log("After init")
@@ -55,6 +56,7 @@ class FeatureExtract:
               f"S radius: {self.s_radius }\n"
               f"Capillary radius: {self.capillary_radius}\n"
               f"Drop Height: {self.drop_height }")
+        self.reconstruct()
 
     def show_features(self):
         str_features = ""
@@ -137,7 +139,7 @@ class FeatureExtract:
                 diff = abs(r_0[i] - r_0[i-1])
             i += 1
             num_point_ro_circlefit += 1
-
+        self.apex_pos = len(r_0)
         return r_0[-1]
 
     # Find maximum (bulge) x value from 70% of profile
@@ -159,9 +161,65 @@ class FeatureExtract:
         R_e = 0
         i = n
 
+    def reconstruct(self):
+        image_array = np.zeros((500, 500), dtype=np.uint8)
+        #for x, y in zip(self.x, self.y):
+        #    image_array[y, x] = 255
+        xdh, ydh = self.show_drop_height()
+        for x, y in zip(xdh, ydh):
+            image_array[y, x] = 255
+        xcap, ycap= self.show_cap()
+        for x, y in zip(xcap, ycap):
+            image_array[y, x] = 255
+        xa, ya= self.show_apex()
+        for x, y in zip(xa, ya):
+            image_array[y, x] = 255
+        xre, yre, xrs, yrs = self.show_rs_re()
+        for x, y in zip(xre, yre):
+            image_array[y, x] = 255
+        for x, y in zip(xrs, yrs):
+            image_array[y, x] = 255
+        self.show_image(image_array)
 
+    def show_image(self, img):
+        plt.imshow(img, cmap=plt.get_cmap('gray'))
+        plt.show()
+
+    def show_drop_height(self):
+        x, y = [], []
+        for i in range(self.drop_height):
+            x.append(5)
+            y.append(i)
+        return x, y
+
+    def show_cap(self):
+        x, y = [], []
+        for i in range(self.capillary_radius):
+            x.append(i)
+            y.append(5)
+        return x, y
+
+    def show_rs_re(self):
+        xre, yre, xrs, yrs = [], [],  [], []
+        for i in range(int(self.equator_radius)):
+            xre.append(i)
+            yre.append(self.y[int(self.re_pos)])
+        print(self.rs_pos)
+        if self.rs_pos == None:
+            xrs, yrs = self.show_cap()
+        else:
+            for i in range(int(self.s_radius)):
+                xre.append(i)
+                yre.append(self.y[int(self.rs_pos)])
+        return xre, yre, xrs, yrs
+    def show_apex(self):
+        xa, ya = [], []
+        for i in range(int(self.apex_radius)):
+            xa.append(i)
+            ya.append(self.y[self.apex_pos])
+        return xa, ya
 def Find_Re_Rs(x,y,n,Drop_Height, R_Cap):
-
+  rs_pos, re_pos = 0, 0
   #Averaging function used in
   def Average_x(x,i,n):
   # i-n>=0. So I set i=n
@@ -174,6 +232,7 @@ def Find_Re_Rs(x,y,n,Drop_Height, R_Cap):
   def Recur_Equator_Radius(x,i,n):
   #base condition
       if Average_x(x,i,n)>Average_x(x,i+1,n):
+        re_pos = i
         return x[i]
       elif i>=len(x)-n-3 or i>len(x)*0.7:
         # I searcg 70% for finding R_e
@@ -187,14 +246,17 @@ def Find_Re_Rs(x,y,n,Drop_Height, R_Cap):
     num_point_RH_Circlefit=round(0.3*len(x))
     Points_RH_Circlefit=np.stack((x[:num_point_RH_Circlefit],y[:num_point_RH_Circlefit]),axis=1)
     xc, yc, R_e, sigma = taubinSVD(Points_RH_Circlefit)
-
+    re_pos = xc
   # Find R_s at y=2*R_e
   if R_e<0.5*Drop_Height:
     #res=index of y if y>2*R_e
     res = next(xx for xx, val in enumerate(y) if val > 2*R_e)
     R_s=x[res]
+    rs_pos = res
+
   else:
     # Drop is too small
     R_s=R_Cap
-  return R_e,R_s
+    rs_pos = 0
+  return R_e,R_s, re_pos, rs_pos
 
