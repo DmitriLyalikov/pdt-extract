@@ -98,20 +98,14 @@ class DropProfile:
         print(num_features)
         # show_image(labeled_image)
         # Remove feature 2 which is the internal noise from light
-        #for i in range(num_features):
-        #     final_image[labeled_image == i] = 0
         final_image[labeled_image == 1] = 255
 
-        #final_image[labeled_image == 2] =
-        #final_image[labeled_image == 1] = 255
         final_image = split_profile(final_image)
 
         # Create ordered set of X and Y coordinates along edge profile
-        indices = np.where(final_image > 0) #
+        indices = np.where(final_image > 0)
         x = np.flip(indices[1])
         y = np.flip(indices[0])
-        print(x)
-        print(y)
         reconstruct(x, y)
         # Extract and save profile features to feature list
         features = FeatureExtract(sorted(x), y)
