@@ -112,7 +112,7 @@ class FeatureExtract:
         # Find s_radius at y = 2 * equator_radius
         if self.equator_radius < 0.5 * self.drop_height:
             # res = index of y if y > 2 * equator_radiuso
-            res = next(xx for xx, val in enumerate(np.flip(self.y)) if val > 2 * self.equator_radius)
+            res = next(xx for xx, val in enumerate(self.y) if val > 2 * self.equator_radius)
             self.s_radius = self.x[res]
         else:
             # Drop is too small
