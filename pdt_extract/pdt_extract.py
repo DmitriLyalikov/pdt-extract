@@ -19,6 +19,7 @@ import imageio
 import os
 from scipy import ndimage
 from feature_extract import FeatureExtract
+import math
 
 import numpy as np
 from numpy import fft
@@ -39,6 +40,26 @@ class DropProfile:
         self.max_height = 0
         self.max_width = 0
         self.feature_list = []
+        self.ar = []
+
+    def avg_ar(self):
+        num = len(self.ar)
+        length = len(self.ar[0])
+        avg = [0] * length
+        rms = [0] * length
+        for i in range(num):
+            for j in range(length):
+                avg[j] += self.ar[i][j]
+
+        means = [x / num for x in avg]
+        for i in range(num):
+            for j in range(length):
+                rms[j] += (self.ar[i][j] - means[j]) ** 2
+
+
+        print(rms)
+        return rms
+
 
     # Perform bulk profile and feature extraction on all files in self.path
     # generate drop profile .jpg and save to self.destination
@@ -80,6 +101,7 @@ class DropProfile:
             os.chdir("../pdt_extract")
 
         print(f"Done Extracting Profiles")
+        self.avg_ar()
         return coord_list
 
     # perform extraction of profile and feature set given a path to an image with respect to self.path
@@ -110,14 +132,17 @@ class DropProfile:
         indices = np.where(final_image > 0)
         x = np.flip(indices[1])
         y = np.flip(indices[0])
+
         reconstruct(x, y)
         if save:
             imageio.imwrite(filename, np.uint8(final_image))
         # Extract and save profile features to feature list
         if extract:
-            features = FeatureExtract(x, y)
+            features = FeatureExtract(sorted(x), y)
             features.feature_set["image"] = filename
             self.feature_list.append(features.feature_set)
+            self.pd = features.pd
+            self.ar.append(features.ar)
             show_image(final_image)
             print(f"{filename}: {features.show_features()}")
             return final_image, features.feature_set, x, y
@@ -328,5 +353,5 @@ def fft_profile(profile):
 
 if __name__ == '__main__':
     profiles = DropProfile()
-    profiles.extract_from_dir(canny_done=False, extract=False)
+    profiles.extract_from_dir(canny_done=True, extract=True)
     # profiles.extract_from_file(fname="../matlab_canny/d-1-55.png", canny_done=True)

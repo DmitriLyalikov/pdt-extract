@@ -39,7 +39,7 @@ class FeatureExtract:
         self.drop_height = self.y[0]
         self.equator_radius, self.s_radius = self.find_re_rs()
         #self.equator_radius, self.s_radius = Find_Re_Rs(x[::-1], y[::-1], 5, self.drop_height, self.capillary_radius)
-        self.equator_radius, self.s_radius, self.re_pos, self.rs_pos = Find_Re_Rs(x[::-1], y[::-1], 15, self.drop_height, self.capillary_radius)
+        #self.equator_radius, self.s_radius, self.re_pos, self.rs_pos = Find_Re_Rs(x[::-1], y[::-1], 15, self.drop_height, self.capillary_radius)
         # self.s_radius = self.find_s_radius(equator_index)
         self.apex_radius = self.find_apex_radius()
         #self.print_debug_log("After init")
@@ -56,7 +56,7 @@ class FeatureExtract:
               f"S radius: {self.s_radius }\n"
               f"Capillary radius: {self.capillary_radius}\n"
               f"Drop Height: {self.drop_height }")
-        self.reconstruct()
+        # self.reconstruct()
 
     def show_features(self):
         str_features = ""
@@ -112,7 +112,7 @@ class FeatureExtract:
         # Find s_radius at y = 2 * equator_radius
         if self.equator_radius < 0.5 * self.drop_height:
             # res = index of y if y > 2 * equator_radiuso
-            res = next(xx for xx, val in enumerate(self.y) if val > 2 * self.equator_radius)
+            res = next(xx for xx, val in enumerate(np.flip(self.y)) if val > 2 * self.equator_radius)
             self.s_radius = self.x[res]
         else:
             # Drop is too small
@@ -126,21 +126,29 @@ class FeatureExtract:
 
         num_point_ro_circlefit = round(len(self.x) * ratio_drop_length) + 1
 
-        percent_drop_ro = 0.1
-        i = 0
-        diff = 0
-        r0 = 0
-        r_0 = []
-        while diff >= change_ro*r0 or num_point_ro_circlefit <= percent_drop_ro * len(self.x):
-            points_ro_circlefit = np.stack((self.x[:num_point_ro_circlefit], self.y[:num_point_ro_circlefit]), axis=1)
-            xc, yc, r0, sigma = taubinSVD(points_ro_circlefit)
-            r_0.append(r0)
-            if i > 1:
-                diff = abs(r_0[i] - r_0[i-1])
-            i += 1
-            num_point_ro_circlefit += 1
-        self.apex_pos = len(r_0)
+        percent_drop_ro = 0.01
+        pd = []
+        ar = []
+        for percent_drop_ro in np.linspace(.001, .8, num=800):
+            i = 0
+            diff = 0
+            r0 = 0
+            r_0 = []
+            while diff >= change_ro*r0 or num_point_ro_circlefit <= percent_drop_ro * len(self.x):
+                points_ro_circlefit = np.stack((self.x[:num_point_ro_circlefit], self.y[:num_point_ro_circlefit]), axis=1)
+                xc, yc, r0, sigma = taubinSVD(points_ro_circlefit)
+                r_0.append(r0)
+                if i > 1:
+                    diff = abs(r_0[i] - r_0[i-1])
+                i += 1
+                num_point_ro_circlefit += 1
+            self.apex_pos = len(r_0)
+            pd.append(percent_drop_ro)
+            ar.append(r_0[-1])
+        self.pd = pd
+        self.ar = ar
         return r_0[-1]
+
 
     # Find maximum (bulge) x value from 70% of profile
     def find_equator_radius(self):

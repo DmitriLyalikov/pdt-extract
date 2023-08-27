@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="added support for no feature extraction">
+    <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Feature Sets/features.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/d-1-55.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.0.55.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/d.1.05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdt_extract/feature_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/feature_extract.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdt_extract/pdt_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/pdt_extract.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,23 +40,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ToolWindowRun.ShowToolbar": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/rocket/PycharmProjects/pdt-extract/Pendant Drops",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/rocket/PycharmProjects/pdt-extract/Pendant Drops&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Pendant Drops" />
@@ -60,6 +66,7 @@
       <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\pendant_drops" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\Pendant Drops\matlab_canny" />
       <recent name="$PROJECT_DIR$/Pendant Drops/matlab_canny" />
       <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\Pendant Drops" />
       <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\doc_imgs" />
@@ -148,7 +155,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in /home/rocket/PycharmProjects/pdt-extract/pdt_extract/test-feature_extract.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests in C:/Users/Dmitr/OneDrive/Documents/Manhattan College UG/ACS/Canny-Edge-Detector-master/pdt_extract/test-feature_extract.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="pdt-extract" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -169,7 +176,7 @@
         <item itemvalue="Python.feature_extract" />
         <item itemvalue="Python.__init__ (1)" />
         <item itemvalue="Python tests.Python tests for test-feature_extract.MyTestCase.test_something" />
-        <item itemvalue="Python tests.Python tests in /home/rocket/PycharmProjects/pdt-extract/pdt_extract/test-feature_extract.py" />
+        <item itemvalue="Python tests.Python tests in C:/Users/Dmitr/OneDrive/Documents/Manhattan College UG/ACS/Canny-Edge-Detector-master/pdt_extract/test-feature_extract.py" />
       </list>
     </recent_temporary>
   </component>
@@ -226,13 +233,6 @@
       <workItem from="1689548352343" duration="342000" />
       <workItem from="1689551306602" duration="6873000" />
       <workItem from="1689617826927" duration="1207000" />
-    </task>
-    <task id="LOCAL-00021" summary="update docs, added functions, rename files">
-      <created>1682475717160</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1682475717160</updated>
     </task>
     <task id="LOCAL-00022" summary="update docs, added functions, rename files">
       <created>1682538103296</created>
@@ -570,11 +570,29 @@
       <option name="project" value="LOCAL" />
       <updated>1687868480977</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="Revert &quot;add reversal in re-rs function for accurate y values&quot;&#10;&#10;This reverts commit f49467ac">
+      <created>1692206155203</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1692206155203</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -614,11 +632,63 @@
     <MESSAGE value="added support for preprocessed edge profiles" />
     <MESSAGE value="used originial Re-Rs function" />
     <MESSAGE value="added support for no feature extraction" />
-    <option name="LAST_COMMIT_MESSAGE" value="added support for no feature extraction" />
+    <MESSAGE value="Revert &quot;add reversal in re-rs function for accurate y values&quot;&#10;&#10;This reverts commit f49467ac" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;add reversal in re-rs function for accurate y values&quot;&#10;&#10;This reverts commit f49467ac" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/pdt_extract.py</url>
+          <line>132</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/pdt_extract.py</url>
+          <line>133</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/pdt_extract.py</url>
+          <line>141</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/pdt_extract.py</url>
+          <line>140</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/pdt_extract.py</url>
+          <line>142</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/pdt_extract.py</url>
+          <line>145</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/feature_extract.py</url>
+          <line>112</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/feature_extract.py</url>
+          <line>114</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/feature_extract.py</url>
+          <line>115</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/pdt_extract$feature_extract.coverage" NAME="feature_extract Coverage Results" MODIFIED="1690222022505" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
-    <SUITE FILE_PATH="coverage/pdt_extract$pdt_extract__1_.coverage" NAME="pdt_extract (1) Coverage Results" MODIFIED="1690226637057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
+    <SUITE FILE_PATH="coverage/pdt_extract$pdt_extract__1_.coverage" NAME="pdt_extract (1) Coverage Results" MODIFIED="1692631341469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
+    <SUITE FILE_PATH="coverage/pdt_extract$feature_extract.coverage" NAME="feature_extract Coverage Results" MODIFIED="1692459818370" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
     <SUITE FILE_PATH="coverage/pdt_extract$original_extraction_functions.coverage" NAME="original_extraction_functions Coverage Results" MODIFIED="1689553968947" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
   </component>
 </project>
