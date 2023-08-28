@@ -139,7 +139,7 @@ class DropProfile:
             features = FeatureExtract(sorted(x), y)
             features.feature_set["image"] = filename
             self.feature_list.append(features.feature_set)
-            show_image(final_image)
+            # show_image(final_image)
             print(f"{filename}: {features.show_features()}")
             return final_image, features.feature_set, x, y
         fft_profile(final_image)
@@ -176,7 +176,7 @@ def extract_profile_from_image(path_to_file: str, img: ndimage = None, load=True
 # we need to make sure it is either the only vertical minimum,
 # or find the midpoint between the furthest away vertical minimum column and split the image at that midpoint instead
 def split_profile(img: ndimage):
-    show_image(img)
+    # show_image(img)
 
     nonzero_coords = np.argwhere(img != 0)
     lowest_position = np.min(nonzero_coords, axis=0)
@@ -213,7 +213,6 @@ def show_image(img):
 # img: passed in as full directory
 def load_edge(img: str) -> ndimage:
     lion = imageio.v2.imread(img, None)
-    show_image(lion)
     # Convert to grayscale
     img = np.dot(lion[..., :3], [0.299, 0.587, 0.114])
     show_image(img)
@@ -222,7 +221,7 @@ def load_edge(img: str) -> ndimage:
 
 # Load the next image in subdir
 # img: passed in as full directory
-def load_convert_image(img: str, sigma_val=1):
+def load_convert_image(img: str, sigma_val=.5):
     lion = imageio.v2.imread(img, None)
     lion_gray = np.dot(lion[..., :3], [0.299, 0.587, 0.114])
     # Find the middle row index

@@ -22,6 +22,7 @@ import numpy as np
 from circle_fit import taubinSVD
 import matplotlib.pyplot as plt
 import pickle
+import cv2
 
 
 class FeatureExtract:
@@ -33,6 +34,13 @@ class FeatureExtract:
 
         self.x = x
         self.y = y
+        self.feature_positions = {
+            "Drop Height": [1, 0, 0],
+            "Capillary": [0, -1, -1],
+            "Apex": [0, 0, 0],
+            "Equator Radius": [0, 0, 0],
+            "R-s": [0, 0, 0]
+        }
 
         self.capillary_radius = self.x[-1]
         self.drop_height = self.y[0]
@@ -57,6 +65,8 @@ class FeatureExtract:
               f"Capillary radius: {self.capillary_radius}\n"
               f"Drop Height: {self.drop_height }")
 
+        rgi = ProfileGenerator(self.x, self.y, features=self.feature_positions)
+
     def show_features(self):
         str_features = ""
         for key, value in self.feature_set.items():
@@ -75,12 +85,16 @@ class FeatureExtract:
         # compare x-i_th vs x_i+t_th until it decreases to find equator
         if self.average_x(i, n) < self.average_x(i+1, n) and i <= len(self.x) - n-3:
             i += 1
+            self.feature_positions["Equator Radius"][1] += 1
+            self.feature_positions["Equator Radius"][2] += 1
             output = self.recursive_equator_radius(i, n)
             if output is not None:
                 self.equator_radius = output
+                # self.feature_positions["R-e"] = (0, i, i)
         else:
             if i <= len(self.x) * 0.7:
                 # assumed 70% of drop is enough for the equator radius
+                self.feature_positions["Equator Radius"] = (0, i, i)
                 return self.x[i]
             else:
                 return
@@ -107,15 +121,18 @@ class FeatureExtract:
                 (self.x[:num_points_to_circlefit],
                  self.y[:num_points_to_circlefit]), axis=1)
             xc, yc, self.equator_radius, sigma = taubinSVD(points_rh_circlefit)
+            self.feature_positions["Equator Radius"] = (0, xc, yc)
 
         # Find s_radius at y = 2 * equator_radius
         if self.equator_radius < 0.5 * self.drop_height:
             # res = index of y if y > 2 * equator_radius
             res = next(xx for xx, val in enumerate(np.flip(self.y)) if val > 2 * self.equator_radius)
             self.s_radius = self.x[res]
+            self.feature_positions["R-s"] = (0, res, res)
         else:
             # Drop is too small
             self.s_radius = self.capillary_radius
+            self.feature_positions["R-s"] = self.feature_positions["Capillary"]
         return self.equator_radius, self.s_radius
 
     # Use Circle fit to approximate apex radius of edge profile
@@ -138,7 +155,7 @@ class FeatureExtract:
                 diff = abs(r_0[i] - r_0[i-1])
             i += 1
             num_point_ro_circlefit += 1
-        self.apex_pos = len(r_0)
+        self.feature_positions["Apex"] = (0, len(r_0), len(r_0))
         return r_0[-1]
 
 
@@ -176,63 +193,49 @@ class FeatureExtract:
         return xgb_prediction  # , lgbm_prediction
 
 
-    def reconstruct(self):
-        image_array = np.zeros((500, 500), dtype=np.uint8)
-        #for x, y in zip(self.x, self.y):
-        #    image_array[y, x] = 255
-        xdh, ydh = self.show_drop_height()
-        for x, y in zip(xdh, ydh):
-            image_array[y, x] = 255
-        xcap, ycap= self.show_cap()
-        for x, y in zip(xcap, ycap):
-            image_array[y, x] = 255
-        xa, ya= self.show_apex()
-        for x, y in zip(xa, ya):
-            image_array[y, x] = 255
-        xre, yre, xrs, yrs = self.show_rs_re()
-        for x, y in zip(xre, yre):
-            image_array[y, x] = 255
-        for x, y in zip(xrs, yrs):
-            image_array[y, x] = 255
-        self.show_image(image_array)
+    def show_image(self, img):
+        plt.imshow(img, cmap=plt.get_cmap('gray'))
+        plt.show()
+
+class ProfileGenerator:
+    def __init__(self, x, y, features, height=500, width=500):
+        self.x = x
+        self.y = y
+        self.height = height
+        self.width = width
+        self.feature_positions = features
+        self.image = np.zeros((height, width), dtype=np.uint8)
+        for x, y in zip(self.x, self.y):
+            self.image[y, x] = 255
+        self.generate_image()
+        self.show_image(self.image)
+
+    def generate_image(self):
+        for feature, (direction, x, y) in self.feature_positions.items():
+            self.fill_line(x, y, direction, self.width if direction == 0 else self.height)
+            if feature != "Drop Height":
+                self.add_text(self.x[x], self.y[y], feature)  # Add feature label above the line
+
+    def add_text(self, x, y, text):
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_scale = 0.5
+        font_color = (255, 255, 255)  # White color
+        thickness = 1
+        text_size = cv2.getTextSize(text, font, font_scale, thickness)[0]
+        text_x = x - text_size[0] // 2
+        text_y = y - text_size[1] - 5
+        cv2.putText(self.image, text, (text_x, text_y), font, font_scale, font_color, thickness)
+
+    def fill_line(self, x, y, direction, length):
+        if direction == 0:
+            self.image[self.y[y], :self.x[x] + 1] = 255
+        elif direction == 1:
+            self.image[:self.y[y] + 1, self.x[x]] = 255
 
     def show_image(self, img):
         plt.imshow(img, cmap=plt.get_cmap('gray'))
         plt.show()
 
-    def show_drop_height(self):
-        x, y = [], []
-        for i in range(self.drop_height):
-            x.append(5)
-            y.append(i)
-        return x, y
-
-    def show_cap(self):
-        x, y = [], []
-        for i in range(self.capillary_radius):
-            x.append(i)
-            y.append(5)
-        return x, y
-
-    def show_rs_re(self):
-        xre, yre, xrs, yrs = [], [],  [], []
-        for i in range(int(self.equator_radius)):
-            xre.append(i)
-            yre.append(self.y[int(self.re_pos)])
-        print(self.rs_pos)
-        if self.rs_pos == None:
-            xrs, yrs = self.show_cap()
-        else:
-            for i in range(int(self.s_radius)):
-                xre.append(i)
-                yre.append(self.y[int(self.rs_pos)])
-        return xre, yre, xrs, yrs
-    def show_apex(self):
-        xa, ya = [], []
-        for i in range(int(self.apex_radius)):
-            xa.append(i)
-            ya.append(self.y[self.apex_pos])
-        return xa, ya
 def Find_Re_Rs(x,y,n,Drop_Height, R_Cap):
   rs_pos, re_pos = 0, 0
   #Averaging function used in
