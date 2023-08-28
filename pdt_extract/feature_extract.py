@@ -22,8 +22,7 @@ import numpy as np
 from circle_fit import taubinSVD
 import matplotlib.pyplot as plt
 import pickle
-import xgboost
-import lightgbm
+
 
 class FeatureExtract:
     def __init__(self, x: list[int], y: list[int]):
@@ -32,19 +31,14 @@ class FeatureExtract:
         :param y: globally used ordered set of x coordinates of the pendant drop profile
         """
 
-        # dbg_log = file.open("FeatureExtract-Dbg-log.txt", 'a')
-
         self.x = x
         self.y = y
 
         self.capillary_radius = self.x[-1]
         self.drop_height = self.y[0]
         self.equator_radius, self.s_radius = self.find_re_rs()
-        #self.equator_radius, self.s_radius = Find_Re_Rs(x[::-1], y[::-1], 5, self.drop_height, self.capillary_radius)
-        #self.equator_radius, self.s_radius, self.re_pos, self.rs_pos = Find_Re_Rs(x[::-1], y[::-1], 15, self.drop_height, self.capillary_radius)
-        # self.s_radius = self.find_s_radius(equator_index)
+
         self.apex_radius = self.find_apex_radius()
-        #self.print_debug_log("After init")
         # Normalize to dimensionless ratio to apex radius
         self.feature_set = {
             "Drop height": self.drop_height / self.apex_radius,
@@ -53,13 +47,15 @@ class FeatureExtract:
             "R-e": self.equator_radius / self.apex_radius,
             "Apex Radius": self.apex_radius
         }
+        self.xgb_beta = self.predict_beta()
+        self.feature_set["XGBoost Beta"] = self.xgb_beta
+        # self.feature_set["LightGBM Beta"] = self.lgbm_beta
+
         print(f"Apex radius (Pixels): {self.apex_radius }")
         print(f"Equator radius: {self.equator_radius }\n"
               f"S radius: {self.s_radius }\n"
               f"Capillary radius: {self.capillary_radius}\n"
               f"Drop Height: {self.drop_height }")
-        # self.reconstruct()
-        self.predict_beta()
 
     def show_features(self):
         str_features = ""
@@ -114,7 +110,7 @@ class FeatureExtract:
 
         # Find s_radius at y = 2 * equator_radius
         if self.equator_radius < 0.5 * self.drop_height:
-            # res = index of y if y > 2 * equator_radiuso
+            # res = index of y if y > 2 * equator_radius
             res = next(xx for xx, val in enumerate(np.flip(self.y)) if val > 2 * self.equator_radius)
             self.s_radius = self.x[res]
         else:
@@ -169,17 +165,15 @@ class FeatureExtract:
         input_series = []
         for key, value in self.feature_set.items():
             input_series.append(value)
-        print(input_series)
         input_series.pop(-1)
-        print(input_series)
-        xgb = pickle.load(open('../../models/xgboost-wide-beta-semituned-model.pkl', 'rb'))
-        lgbm = pickle.load(('../../models/lightgbm-wide-beta-tuned-model.pkl', 'rb'))
+        input_array = np.array(input_series).reshape(1, -1)
+        xgb = pickle.load(open('../../models/xgboost-6-27-large-dataset,800, 2, *1, 5.pkl', "rb"))
+        lgbm = pickle.load(open('../../models/8-27-lightgbm.pkl', "rb"))
 
-        prediction = xgb.predict(input_series)
-        print(prediction)
+        xgb_prediction = xgb.predict(input_array)[0]
+        # lgbm_prediction = lgbm.predict(input_array)
 
-
-
+        return xgb_prediction  # , lgbm_prediction
 
 
     def reconstruct(self):

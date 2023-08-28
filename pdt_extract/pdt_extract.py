@@ -349,5 +349,5 @@ def fft_profile(profile):
 
 if __name__ == '__main__':
     profiles = DropProfile()
-    profiles.extract_from_dir(canny_done=True, extract=True)
+    profiles.extract_from_dir(canny_done=False, extract=True)
     # profiles.extract_from_file(fname="../matlab_canny/d-1-55.png", canny_done=True)
