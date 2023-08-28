@@ -40,7 +40,6 @@ class DropProfile:
         self.max_height = 0
         self.max_width = 0
         self.feature_list = []
-        self.ar = []
 
     def avg_ar(self):
         num = len(self.ar)
@@ -101,7 +100,6 @@ class DropProfile:
             os.chdir("../pdt_extract")
 
         print(f"Done Extracting Profiles")
-        self.avg_ar()
         return coord_list
 
     # perform extraction of profile and feature set given a path to an image with respect to self.path
@@ -141,8 +139,6 @@ class DropProfile:
             features = FeatureExtract(sorted(x), y)
             features.feature_set["image"] = filename
             self.feature_list.append(features.feature_set)
-            self.pd = features.pd
-            self.ar.append(features.ar)
             show_image(final_image)
             print(f"{filename}: {features.show_features()}")
             return final_image, features.feature_set, x, y

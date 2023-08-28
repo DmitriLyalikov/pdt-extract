@@ -21,6 +21,9 @@ are automatically saved to a dictionary: self.feature_set as a key, value pair
 import numpy as np
 from circle_fit import taubinSVD
 import matplotlib.pyplot as plt
+import pickle
+import xgboost
+import lightgbm
 
 class FeatureExtract:
     def __init__(self, x: list[int], y: list[int]):
@@ -30,7 +33,6 @@ class FeatureExtract:
         """
 
         # dbg_log = file.open("FeatureExtract-Dbg-log.txt", 'a')
-
 
         self.x = x
         self.y = y
@@ -57,6 +59,7 @@ class FeatureExtract:
               f"Capillary radius: {self.capillary_radius}\n"
               f"Drop Height: {self.drop_height }")
         # self.reconstruct()
+        self.predict_beta()
 
     def show_features(self):
         str_features = ""
@@ -126,27 +129,20 @@ class FeatureExtract:
 
         num_point_ro_circlefit = round(len(self.x) * ratio_drop_length) + 1
 
-        percent_drop_ro = 0.01
-        pd = []
-        ar = []
-        for percent_drop_ro in np.linspace(.001, .8, num=800):
-            i = 0
-            diff = 0
-            r0 = 0
-            r_0 = []
-            while diff >= change_ro*r0 or num_point_ro_circlefit <= percent_drop_ro * len(self.x):
-                points_ro_circlefit = np.stack((self.x[:num_point_ro_circlefit], self.y[:num_point_ro_circlefit]), axis=1)
-                xc, yc, r0, sigma = taubinSVD(points_ro_circlefit)
-                r_0.append(r0)
-                if i > 1:
-                    diff = abs(r_0[i] - r_0[i-1])
-                i += 1
-                num_point_ro_circlefit += 1
-            self.apex_pos = len(r_0)
-            pd.append(percent_drop_ro)
-            ar.append(r_0[-1])
-        self.pd = pd
-        self.ar = ar
+        percent_drop_ro = 0.246
+        i = 0
+        diff = 0
+        r0 = 0
+        r_0 = []
+        while diff >= change_ro*r0 or num_point_ro_circlefit <= percent_drop_ro * len(self.x):
+            points_ro_circlefit = np.stack((self.x[:num_point_ro_circlefit], self.y[:num_point_ro_circlefit]), axis=1)
+            xc, yc, r0, sigma = taubinSVD(points_ro_circlefit)
+            r_0.append(r0)
+            if i > 1:
+                diff = abs(r_0[i] - r_0[i-1])
+            i += 1
+            num_point_ro_circlefit += 1
+        self.apex_pos = len(r_0)
         return r_0[-1]
 
 
@@ -168,6 +164,23 @@ class FeatureExtract:
         global R_e
         R_e = 0
         i = n
+
+    def predict_beta(self):
+        input_series = []
+        for key, value in self.feature_set.items():
+            input_series.append(value)
+        print(input_series)
+        input_series.pop(-1)
+        print(input_series)
+        xgb = pickle.load(open('../../models/xgboost-wide-beta-semituned-model.pkl', 'rb'))
+        lgbm = pickle.load(('../../models/lightgbm-wide-beta-tuned-model.pkl', 'rb'))
+
+        prediction = xgb.predict(input_series)
+        print(prediction)
+
+
+
+
 
     def reconstruct(self):
         image_array = np.zeros((500, 500), dtype=np.uint8)
