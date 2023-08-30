@@ -184,7 +184,7 @@ class FeatureExtract:
             input_series.append(value)
         input_series.pop(-1)
         input_array = np.array(input_series).reshape(1, -1)
-        xgb = pickle.load(open('../../models/xgboost-6-27-large-dataset,800, 2, *1, 5.pkl', "rb"))
+        xgb = pickle.load(open('../../models/xgboost-8-27.pkl', "rb"))
         lgbm = pickle.load(open('../../models/8-27-lightgbm.pkl', "rb"))
 
         xgb_prediction = xgb.predict(input_array)[0]
