@@ -58,13 +58,13 @@ class FeatureExtract:
         self.xgb_beta = self.predict_beta()
         self.feature_set["XGBoost Beta"] = self.xgb_beta
         # self.feature_set["LightGBM Beta"] = self.lgbm_beta
-
+        """
         print(f"Apex radius (Pixels): {self.apex_radius }")
         print(f"Equator radius: {self.equator_radius }\n"
               f"S radius: {self.s_radius }\n"
               f"Capillary radius: {self.capillary_radius}\n"
               f"Drop Height: {self.drop_height }")
-
+        """
         rgi = ProfileGenerator(self.x, self.y, features=self.feature_positions)
 
     def show_features(self):
