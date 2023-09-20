@@ -49,14 +49,21 @@ class FeatureExtract:
         self.apex_radius = self.find_apex_radius()
         # Normalize to dimensionless ratio to apex radius
         self.feature_set = {
+            "Drop height": self.drop_height,
+            "Capillary radius": self.capillary_radius,
+            "R-s": self.s_radius,
+            "R-e": self.equator_radius,
+            "Apex Radius": self.apex_radius
+        }
+        self.xgb_beta = self.predict_beta()
+        self.feature_set["XGBoost Beta"] = self.xgb_beta
+        self.feature_set = {
             "Drop height": self.drop_height / self.apex_radius,
             "Capillary radius": self.capillary_radius / self.apex_radius,
             "R-s": self.s_radius / self.apex_radius,
             "R-e": self.equator_radius / self.apex_radius,
             "Apex Radius": self.apex_radius
         }
-        self.xgb_beta = self.predict_beta()
-        self.feature_set["XGBoost Beta"] = self.xgb_beta
         # self.feature_set["LightGBM Beta"] = self.lgbm_beta
         """
         print(f"Apex radius (Pixels): {self.apex_radius }")
@@ -65,7 +72,7 @@ class FeatureExtract:
               f"Capillary radius: {self.capillary_radius}\n"
               f"Drop Height: {self.drop_height }")
         """
-        rgi = ProfileGenerator(self.x, self.y, features=self.feature_positions)
+        # rgi = ProfileGenerator(self.x, self.y, features=self.feature_positions)
 
     def show_features(self):
         str_features = ""
@@ -138,7 +145,7 @@ class FeatureExtract:
     # Use Circle fit to approximate apex radius of edge profile
     # ratio_drop_length: 1 >= float value > 0 representing number points along profile to approximate with
     # change_ro: float value representing minimum value of change in circle radius before stopping approximation
-    def find_apex_radius(self, ratio_drop_length: float = 0.15, change_ro: float = .005) -> float:
+    def find_apex_radius(self, ratio_drop_length: float = 0.2, change_ro: float = .005) -> float:
 
         num_point_ro_circlefit = round(len(self.x) * ratio_drop_length) + 1
 
@@ -180,16 +187,24 @@ class FeatureExtract:
 
     def predict_beta(self):
         input_series = []
-        for key, value in self.feature_set.items():
-            input_series.append(value)
-        input_series.pop(-1)
-        input_array = np.array(input_series).reshape(1, -1)
-        xgb = pickle.load(open('../../models/xgboost-8-27.pkl', "rb"))
-        lgbm = pickle.load(open('../../models/8-27-lightgbm.pkl', "rb"))
 
-        xgb_prediction = xgb.predict(input_array)[0]
-        # lgbm_prediction = lgbm.predict(input_array)
+        for i in range(-10, 6):
+            input_series = []
+            test_dict = {}
+            # Iterate through the dictionary and divide every value by the last value
+            for key, value in self.feature_set.items():
+                if key != 'Apex Radius':
+                    test_dict[key] = value / (self.apex_radius + i)
+                    input_series.append(test_dict[key])
+            # input_series.pop(-1)
+            input_array = np.array(input_series).reshape(1, -1)
+            xgb = pickle.load(open('../../models/xgboost-8-27.pkl', "rb"))
+            lgbm = pickle.load(open('../../models/8-27-lightgbm.pkl', "rb"))
 
+            xgb_prediction = xgb.predict(input_array)[0]
+            # lgbm_prediction = lgbm.predict(input_array)
+            print(test_dict)
+            print(xgb_prediction)
         return xgb_prediction  # , lgbm_prediction
 
 
@@ -227,6 +242,7 @@ class ProfileGenerator:
         cv2.putText(self.image, text, (text_x, text_y), font, font_scale, font_color, thickness)
 
     def fill_line(self, x, y, direction, length):
+
         if direction == 0:
             self.image[self.y[y], :self.x[x] + 1] = 255
         elif direction == 1:

@@ -19,6 +19,7 @@ import imageio
 import os
 from scipy import ndimage
 from feature_extract import FeatureExtract
+from apex_radius import ApexBuilder
 import math
 
 import numpy as np
@@ -123,6 +124,10 @@ class DropProfile:
         # Remove feature 2 which is the internal noise from light
 
         final_image[labeled_image == 1] = 255
+        indices = np.where(final_image > 0)
+        x = np.flip(indices[1])
+        y = np.flip(indices[0])
+        apex = ApexBuilder(x, y)
 
         final_image = split_profile(final_image)
 

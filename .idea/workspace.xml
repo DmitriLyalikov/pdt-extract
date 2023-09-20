@@ -4,16 +4,133 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-1-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-2-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-2-55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pendant Drops/d-3-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/lightgbm-wide-beta-tuned-model.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/pdt-regression-model.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/predict.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/xgboost-wide-beta-semituned-model.pkl" afterDir="false" />
+    <list default="true" id="b68b46cb-188f-4881-a7bd-97b4f82cee92" name="Changes" comment="added ProfileGenerator Module">
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.0.06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.0.56.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.1.06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.1.56.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.2.06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.2.56.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.3.06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.3.56.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.4.06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.4.56.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.5.06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.5.56.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.6.06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.6.56.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.7.06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.7.56.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.8.06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/e.8.56.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/Drop Profiles/img_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.1.55.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.3.05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.5.05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdt_extract/apex_radius.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Feature Sets/features.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/Feature Sets/features.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.0.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.0.55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.1.05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.1.05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.1.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.1.55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.2.05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.2.05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.2.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.2.55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.3.05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.3.05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.3.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.3.55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.4.05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.4.05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.4.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.4.55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.5.05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.5.05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.5.55 copy.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.5.55 copy.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.5.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.5.55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.6.05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.6.05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.6.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.6.55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.7.05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.7.05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.7.55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.7.55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Old Images/d.8.05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Old Images/d.8.05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-2-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-2-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-2-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-2-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-3-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-3-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-3-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-3-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-4-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-4-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-4-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-4-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-5-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-5-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-5-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-5-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-6-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-6-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-6-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-6-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-7-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-7-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-7-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-7-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/arch/d-8-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/arch/d-8-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.0.55.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.0.55.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.1.05.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.1.05.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.1.55.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.1.55.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.1.55.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.2.05.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.2.05.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.2.55.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.2.55.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.3.05 copy.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.3.05 copy.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.3.05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.3.05.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.3.05.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.3.05t.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.3.05t.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.3.55.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.3.55.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.4.05.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.4.05.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.4.55.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.4.55.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.5.05 copy.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.5.05 copy.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.5.05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.5.05.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.5.05.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.5.55.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.5.55.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.6.05.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.6.05.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.6.55.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.6.55.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.7.05.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.7.05.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.7.55.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.7.55.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/d.8.05.tif" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/d.8.05.tif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/Water_Drop/outputd.rtf" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/Water_Drop/outputd.rtf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/e.0.06.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/e.0.06.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/e.0.56.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/e.0.56.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/e.1.06.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/e.1.06.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-2-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-2-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-2-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-2-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-3-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-3-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-3-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-3-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-4-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-4-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-4-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-4-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-5-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-5-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-5-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-5-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-6-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-6-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-6-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-6-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-7-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-7-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-7-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-7-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/arch/d-8-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/arch/d-8-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-1-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-1-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-2-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-2-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-2-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-2-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-3-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-3-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-3-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-3-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-4-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-4-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-4-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-4-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-5-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-5-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-5-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-5-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-6-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-6-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-6-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-6-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-7-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-7-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-7-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-7-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good/d-8-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/canny_good/d-8-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-1-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-1-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-2-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-2-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-2-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-2-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-3-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-3-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-3-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-3-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-4-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-4-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-4-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-4-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-5-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-5-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-5-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-5-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-6-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-6-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-6-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-6-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-7-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-7-05.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-7-55.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-7-55.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pendant Drops/matlab_canny/d-8-05.png" beforeDir="false" afterPath="$PROJECT_DIR$/Pendant Drops/water/matlab_canny/d-8-05.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdt_extract/feature_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/feature_extract.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdt_extract/pdt_extract.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdt_extract/pdt_extract.py" afterDir="false" />
     </list>
@@ -36,6 +153,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2LYXbLSHvv4W8PaPL6t0SFl1HSZ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -44,40 +164,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ToolWindowRun.ShowToolbar": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Dmitr/OneDrive/Documents/Manhattan College UG/ACS/Canny-Edge-Detector-master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/rocket/acs_grant/pdt-extract&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Pendant Drops" />
+      <recent name="$PROJECT_DIR$/Pendant Drops/matlab_canny/canny_good" />
+      <recent name="$PROJECT_DIR$/models" />
       <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master" />
       <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\Pendant Drops" />
-      <recent name="$PROJECT_DIR$/Pendant Drops" />
-      <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\Pendant Drops\Water_Drop\arch" />
-      <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\Pendant Drops\matlab_canny\arch" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Pendant Drops/water" />
+      <recent name="$PROJECT_DIR$/Pendant Drops/Old Images" />
       <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\Pendant Drops\matlab_canny" />
       <recent name="$PROJECT_DIR$/Pendant Drops/matlab_canny" />
       <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\Pendant Drops" />
-      <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\doc_imgs" />
-      <recent name="C:\Users\Dmitr\OneDrive\Documents\Manhattan College UG\ACS\Canny-Edge-Detector-master\pdt_extract" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.pdt_extract (1)">
+  <component name="RunManager" selected="Python.pdt_extract">
     <configuration name="__init__ (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pdt-extract" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -122,7 +242,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pdt_extract (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="pdt_extract" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pdt-extract" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -159,7 +279,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in C:/Users/Dmitr/OneDrive/Documents/Manhattan College UG/ACS/Canny-Edge-Detector-master/pdt_extract/test-feature_extract.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests in /home/rocket/acs_grant/pdt-extract/pdt_extract/test-feature_extract.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="pdt-extract" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -174,13 +294,20 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.__init__ (1)" />
+      <item itemvalue="Python.feature_extract" />
+      <item itemvalue="Python.pdt_extract" />
+      <item itemvalue="Python tests.Python tests for test-feature_extract.MyTestCase.test_something" />
+      <item itemvalue="Python tests.Python tests in /home/rocket/acs_grant/pdt-extract/pdt_extract/test-feature_extract.py" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.pdt_extract (1)" />
+        <item itemvalue="Python.pdt_extract" />
         <item itemvalue="Python.feature_extract" />
         <item itemvalue="Python.__init__ (1)" />
         <item itemvalue="Python tests.Python tests for test-feature_extract.MyTestCase.test_something" />
-        <item itemvalue="Python tests.Python tests in C:/Users/Dmitr/OneDrive/Documents/Manhattan College UG/ACS/Canny-Edge-Detector-master/pdt_extract/test-feature_extract.py" />
+        <item itemvalue="Python tests.Python tests in /home/rocket/acs_grant/pdt-extract/pdt_extract/test-feature_extract.py" />
       </list>
     </recent_temporary>
   </component>
@@ -238,6 +365,12 @@
       <workItem from="1689551306602" duration="6873000" />
       <workItem from="1689617826927" duration="1207000" />
       <workItem from="1693174080439" duration="3466000" />
+      <workItem from="1693239077389" duration="12134000" />
+      <workItem from="1693950224348" duration="1825000" />
+      <workItem from="1694110565264" duration="698000" />
+      <workItem from="1694470561184" duration="758000" />
+      <workItem from="1694692782614" duration="4910000" />
+      <workItem from="1695142495569" duration="1829000" />
     </task>
     <task id="LOCAL-00023" summary="update docs, added functions, rename files">
       <created>1682538396282</created>
@@ -582,7 +715,7 @@
       <option name="project" value="LOCAL" />
       <updated>1693174160506</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -613,8 +746,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added cropped image" />
-    <MESSAGE value="added cropped images" />
     <MESSAGE value="added edge 2 removal to complete profile extraction" />
     <MESSAGE value="tested across sample images" />
     <MESSAGE value="added mass extraction automation" />
@@ -638,22 +769,55 @@
     <MESSAGE value="added support for no feature extraction" />
     <MESSAGE value="Revert &quot;add reversal in re-rs function for accurate y values&quot;&#10;&#10;This reverts commit f49467ac" />
     <MESSAGE value="resolve apex radius" />
-    <option name="LAST_COMMIT_MESSAGE" value="resolve apex radius" />
+    <MESSAGE value="validated on canny raw image set" />
+    <MESSAGE value="added ProfileGenerator Module" />
+    <option name="LAST_COMMIT_MESSAGE" value="added ProfileGenerator Module" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdt_extract/feature_extract.py</url>
-          <line>178</line>
-          <option name="timeStamp" value="26" />
+          <line>218</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/feature_extract.py</url>
+          <line>224</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/pdt_extract.py</url>
+          <line>129</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/apex_radius.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/apex_radius.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/apex_radius.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdt_extract/apex_radius.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/pdt_extract$pdt_extract__1_.coverage" NAME="pdt_extract (1) Coverage Results" MODIFIED="1693229548897" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
-    <SUITE FILE_PATH="coverage/pdt_extract$feature_extract.coverage" NAME="feature_extract Coverage Results" MODIFIED="1692459818370" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
+    <SUITE FILE_PATH="coverage/pdt_extract$pdt_extract__1_.coverage" NAME="pdt_extract (1) Coverage Results" MODIFIED="1693434063898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
+    <SUITE FILE_PATH="coverage/pdt_extract$pdt_extract.coverage" NAME="pdt_extract Coverage Results" MODIFIED="1695143091017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
     <SUITE FILE_PATH="coverage/pdt_extract$original_extraction_functions.coverage" NAME="original_extraction_functions Coverage Results" MODIFIED="1689553968947" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
+    <SUITE FILE_PATH="coverage/pdt_extract$feature_extract.coverage" NAME="feature_extract Coverage Results" MODIFIED="1693434059744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pdt_extract" />
   </component>
 </project>
