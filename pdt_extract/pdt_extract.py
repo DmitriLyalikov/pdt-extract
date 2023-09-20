@@ -26,7 +26,8 @@ import numpy as np
 from numpy import fft
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import warnings
+warnings.filterwarnings("ignore")
 
 class DropProfile:
     def __init__(self, path: str = "../Pendant Drops", dest: str = "Drop Profiles", feature_set: str = "features.csv"):
@@ -127,8 +128,8 @@ class DropProfile:
         indices = np.where(final_image > 0)
         x = np.flip(indices[1])
         y = np.flip(indices[0])
-        apex = ApexBuilder(x, y)
-
+        apex = ApexBuilder(sorted(y), x)
+        final_image[labeled_image == 1] = 255
         final_image = split_profile(final_image)
 
         # Create ordered set of X and Y coordinates along edge profile
@@ -226,7 +227,8 @@ def load_edge(img: str) -> ndimage:
 
 # Load the next image in subdir
 # img: passed in as full directory
-def load_convert_image(img: str, sigma_val=1.2):
+# 1.2
+def load_convert_image(img: str, sigma_val=1.6):
     lion = imageio.v2.imread(img, None)
     lion_gray = np.dot(lion[..., :3], [0.299, 0.587, 0.114])
     # Find the middle row index
