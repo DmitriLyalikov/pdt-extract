@@ -87,6 +87,7 @@ class ApexBuilder:
         self.x = new_x
         self.y = sorted(y)[::-1]
 
+
         start_percent = 5
         end_value = 100
         increment = 0.5
@@ -102,6 +103,8 @@ class ApexBuilder:
         for percent_drop in percents:
             y, x = extract_percent_lists(self.y, self.x, percent_drop)
             apex_radius = find_apex_radius(x, y, ratio_drop_length=percent_drop)
+            print(x)
+            print(y)
             apex_radii.append(apex_radius)
             print(f"Percent from middle: {percent_drop}, Apex Radius: {apex_radius}")
         build_plot(percents, apex_radii)
@@ -123,11 +126,11 @@ class ApexBuilder:
     # Use Circle fit to approximate apex radius of edge profile
     # ratio_drop_length: 1 >= float value > 0 representing number points along profile to approximate with
     # change_ro: float value representing minimum value of change in circle radius before stopping approximation
-def find_apex_radius(x, y, ratio_drop_length: float = 0.1, change_ro: float = .005) -> float:
+def find_apex_radius(x, y, ratio_drop_length: float = 0.15, change_ro: float = .005) -> float:
 
     num_point_ro_circlefit = round(len(x) * ratio_drop_length) + 1
 
-    percent_drop_ro = .5
+    percent_drop_ro = .1
     i = 0
     diff = 0
     r0 = 0
