@@ -75,41 +75,36 @@ class ApexBuilder:
         :param x: globally used ordered set of x coordinates of the pendant drop profile
         :param y: globally used ordered set of x coordinates of the pendant drop profile
         """
-        print(y)
-        indices = y.argsort()
+        # Sort Y coordinates from largest to smallest (bottom of drop is largest Y)
+        indices = y.argsort()[::-1]
+
         new_x = [0] * len(y)
         index = 0
+        # Rearrange X based on sorted Y indices
         for i in indices.tolist():
             new_x[index] = x[i]
             index += 1
         self.x = new_x
-        min_x = min(self.x)
-        for i in range(len(self.x)):
-            self.x[i] = self.x[i] - min_x
-        self.y = sorted(y)
-        start_value = 3
-        end_value = 90
+        self.y = sorted(y)[::-1]
+
+        start_percent = 5
+        end_value = 100
         increment = 0.5
 
-        result_list = []
+        percents = []
 
-        current_value = start_value
+        current_value = start_percent
         while current_value <= end_value:
-            result_list.append(current_value)
+            percents.append(current_value)
             current_value += increment
 
-        print(result_list)
-
-        # percents = list(range(5, 100))
         apex_radii = []
-        for percent_drop in result_list:
+        for percent_drop in percents:
             y, x = extract_percent_lists(self.y, self.x, percent_drop)
-            print(y)
-            print(x)
-            apex_radius = find_apex_radius(x[::-1], y[::-1])
+            apex_radius = find_apex_radius(x, y, ratio_drop_length=percent_drop)
             apex_radii.append(apex_radius)
             print(f"Percent from middle: {percent_drop}, Apex Radius: {apex_radius}")
-        # build_plot(percents, apex_radii)
+        build_plot(percents, apex_radii)
         """
         Find middle of each list
         make micro list that is p% of macro list on both sides and extract values
@@ -117,11 +112,6 @@ class ApexBuilder:
         increment p, and plot apex radius vs p
         tune percent_drop_r0
         """
-
-        # Normalize to dimensionless ratio to apex radius
-
-
-
 
     def show_features(self):
         str_features = ""
@@ -133,17 +123,17 @@ class ApexBuilder:
     # Use Circle fit to approximate apex radius of edge profile
     # ratio_drop_length: 1 >= float value > 0 representing number points along profile to approximate with
     # change_ro: float value representing minimum value of change in circle radius before stopping approximation
-def find_apex_radius(x, y, ratio_drop_length: float = 0.15, change_ro: float = .005) -> float:
+def find_apex_radius(x, y, ratio_drop_length: float = 0.1, change_ro: float = .005) -> float:
 
     num_point_ro_circlefit = round(len(x) * ratio_drop_length) + 1
 
-    percent_drop_ro = .05
+    percent_drop_ro = .5
     i = 0
     diff = 0
     r0 = 0
     r_0 = []
     while diff >= change_ro*r0 or num_point_ro_circlefit <= percent_drop_ro * len(x):
-        points_ro_circlefit = np.stack((x[:num_point_ro_circlefit], y[:num_point_ro_circlefit]), axis=1)
+        points_ro_circlefit = np.stack((y[:num_point_ro_circlefit], x[:num_point_ro_circlefit]), axis=1)
         xc, yc, r0, sigma = taubinSVD(points_ro_circlefit)
         r_0.append(r0)
         if i > 1:

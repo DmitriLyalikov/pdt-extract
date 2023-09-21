@@ -125,18 +125,19 @@ class DropProfile:
         # Remove feature 2 which is the internal noise from light
 
         final_image[labeled_image == 1] = 255
-        indices = np.where(final_image > 0)
-        x = indices[1]
-        y = indices[0]
+        indices = np.where(final_image > 250)
+        x = np.flip(indices[1])
+        y = np.flip(indices[0])
         apex = ApexBuilder(x, y)
+        reconstruct(x, y)
         final_image[labeled_image == 1] = 255
         final_image = split_profile(final_image)
 
         # Create ordered set of X and Y coordinates along edge profile
-        indices = np.where(final_image > 0)
+        indices = np.where(final_image > 200)
         x = np.flip(indices[1])
         y = np.flip(indices[0])
-        apex = ApexBuilder(x, y)
+        #apex = ApexBuilder(x, y)
         reconstruct(x, y)
         if save:
             imageio.imwrite(filename, np.uint8(final_image))
