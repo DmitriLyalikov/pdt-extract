@@ -31,7 +31,7 @@ def split_lists_by_percent(list1, list2, percent):
     if percent < 0 or percent > 50:
         raise ValueError("Percent should be between 0 and 50")
 
-    middle_index = len(list1) // 2
+    # middle_index = len(list1) // 2
     middle_index = 0
     offset = int(len(list1) * percent / 100)
 
@@ -44,8 +44,10 @@ def split_lists_by_percent(list1, list2, percent):
     combined_list1 = left_list1 + right_list1
     combined_list2 = left_list2 + right_list2
 
-    return combined_list1, combined_list2
-    #return right_list1, right_list2
+    # return combined_list1, combined_list2
+    return right_list1, right_list2
+
+
 
 def build_plot(x, y):
     plt.plot(x, y)
@@ -55,20 +57,17 @@ def build_plot(x, y):
 
     plt.show()
 
+def extract_percent_lists(list1, list2, percent):
+    # Calculate the number of elements to extract based on the percentage
+    num_elements = len(list1)
+    num_to_extract = int(num_elements * (percent / 100))
 
-def sort_and_reshuffle_lists(first_list, second_list):
-    midpoint = len(first_list) // 2
+    # Slice the input lists to extract the desired number of elements
+    extracted_list1 = list1[:num_to_extract]
+    extracted_list2 = list2[:num_to_extract]
 
-    elements_with_indices = [(element, idx, 0 if idx < midpoint else 1) for idx, element in enumerate(first_list)]
+    return extracted_list1, extracted_list2
 
-
-    sorted_elements = sorted(elements_with_indices, key=lambda x: (x[0], -x[2]))
-
-    sorted_indices = [idx for _, idx, _ in sorted_elements]
-
-    reshuffled_second_list = [second_list[idx] for idx in sorted_indices]
-
-    return sorted_indices, reshuffled_second_list
 
 class ApexBuilder:
     def __init__(self, x: list[int], y: list[int]):
@@ -76,46 +75,41 @@ class ApexBuilder:
         :param x: globally used ordered set of x coordinates of the pendant drop profile
         :param y: globally used ordered set of x coordinates of the pendant drop profile
         """
+        print(y)
+        indices = y.argsort()
+        new_x = [0] * len(y)
+        index = 0
+        for i in indices.tolist():
+            new_x[index] = x[i]
+            index += 1
+        self.x = new_x
+        min_x = min(self.x)
+        for i in range(len(self.x)):
+            self.x[i] = self.x[i] - min_x
+        self.y = sorted(y)
+        start_value = 3
+        end_value = 90
+        increment = 0.5
 
-        self.x = x
-        self.y = y
+        result_list = []
 
+        current_value = start_value
+        while current_value <= end_value:
+            result_list.append(current_value)
+            current_value += increment
 
-        indexed_y = list(enumerate(self.y))
-        indexed_x = list(enumerate(self.x))
-        y_indices = []
-        y_rearranged = []
-        # Sort the indexed list by the values
-        sorted_y = sorted(indexed_y, key=lambda x: x[1])
-        for index, value in sorted_y:
-            print(f"Index: {index}, Value: {value}")
-            y_indices.append(index)
-            y_rearranged.append(value)
+        print(result_list)
 
-
-        x_rearranged = [None] * len(self.x)
-
-
-        # Rearrange the elements based on the index list
-        for i, index in enumerate(y_indices):
-            x_rearranged[index] = x[i]
-        #print(x)
-        #print(y)
-        #print(x_rearranged)
-
-        #sorted_x = sorted(indexed_x, key=lambda x: x[1])
-        #for index, value in sorted_x:
-        #    print(f"Index: {index}, Value: {value}")
-
-
-        percents = list(range(1, 51))
+        # percents = list(range(5, 100))
         apex_radii = []
-        for percent_drop in percents:
-            y, x = split_lists_by_percent(y_rearranged, x_rearranged, percent_drop)
-            apex_radius = find_apex_radius(x, y)
+        for percent_drop in result_list:
+            y, x = extract_percent_lists(self.y, self.x, percent_drop)
+            print(y)
+            print(x)
+            apex_radius = find_apex_radius(x[::-1], y[::-1])
             apex_radii.append(apex_radius)
             print(f"Percent from middle: {percent_drop}, Apex Radius: {apex_radius}")
-        build_plot(percents, apex_radii)
+        # build_plot(percents, apex_radii)
         """
         Find middle of each list
         make micro list that is p% of macro list on both sides and extract values
@@ -139,11 +133,11 @@ class ApexBuilder:
     # Use Circle fit to approximate apex radius of edge profile
     # ratio_drop_length: 1 >= float value > 0 representing number points along profile to approximate with
     # change_ro: float value representing minimum value of change in circle radius before stopping approximation
-def find_apex_radius(x, y, ratio_drop_length: float = 0.2, change_ro: float = 2) -> float:
+def find_apex_radius(x, y, ratio_drop_length: float = 0.15, change_ro: float = .005) -> float:
 
     num_point_ro_circlefit = round(len(x) * ratio_drop_length) + 1
 
-    percent_drop_ro = 1
+    percent_drop_ro = .05
     i = 0
     diff = 0
     r0 = 0

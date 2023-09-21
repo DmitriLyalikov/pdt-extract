@@ -126,9 +126,9 @@ class DropProfile:
 
         final_image[labeled_image == 1] = 255
         indices = np.where(final_image > 0)
-        x = np.flip(indices[1])
-        y = np.flip(indices[0])
-        apex = ApexBuilder(sorted(y), x)
+        x = indices[1]
+        y = indices[0]
+        apex = ApexBuilder(x, y)
         final_image[labeled_image == 1] = 255
         final_image = split_profile(final_image)
 
@@ -136,7 +136,7 @@ class DropProfile:
         indices = np.where(final_image > 0)
         x = np.flip(indices[1])
         y = np.flip(indices[0])
-
+        apex = ApexBuilder(x, y)
         reconstruct(x, y)
         if save:
             imageio.imwrite(filename, np.uint8(final_image))

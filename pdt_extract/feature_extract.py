@@ -19,7 +19,7 @@ are automatically saved to a dictionary: self.feature_set as a key, value pair
 """
 
 import numpy as np
-from circle_fit import taubinSVD
+from circle_fit import taubinSVD, lm, prattSVD, hyperSVD
 import matplotlib.pyplot as plt
 import pickle
 import cv2
