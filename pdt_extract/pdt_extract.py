@@ -27,6 +27,7 @@ from numpy import fft
 import matplotlib.pyplot as plt
 import pandas as pd
 import warnings
+import cv2
 warnings.filterwarnings("ignore")
 
 class DropProfile:
@@ -37,6 +38,7 @@ class DropProfile:
         :param feature_set: file name to save feature set as csv to (should include .csv)
         """
         self.path = path
+        self.original = None
         self.destination = dest
         self.feature_set = feature_set
         self.max_height = 0
@@ -88,7 +90,7 @@ class DropProfile:
             for filename in os.listdir():
                 if not os.path.isdir(filename):
                     print(f"Extracting profile from: {filename}...")
-                    profile = extract_profile_from_image(os.path.join(filename))
+                    self.original, profile = extract_profile_from_image(os.path.join(filename))
                     os.chdir(self.destination)
                     image, features, x, y = self.get_profile(profile, filename, extract=extract)
                     coord_list[f"{filename}"] = [x, y]
@@ -125,20 +127,26 @@ class DropProfile:
         # Remove feature 2 which is the internal noise from light
 
         final_image[labeled_image == 1] = 255
-        indices = np.where(final_image > 250)
+        superimpose_edge(self.original, final_image)
+        indices = np.where(final_image > 0)
         x = np.flip(indices[1])
         y = np.flip(indices[0])
-        apex = ApexBuilder(x, y)
-        reconstruct(x, y)
+        bottom_y = np.max(y)
+        max_index = np.argmax(y)
+
+        # Get the corresponding x value
+        max_x_value = x[max_index]
+        # apex = ApexBuilder(x, y)
+        #reconstruct(x, y)
         final_image[labeled_image == 1] = 255
         final_image = split_profile(final_image)
 
         # Create ordered set of X and Y coordinates along edge profile
-        indices = np.where(final_image > 200)
+        indices = np.where(final_image > 1)
         x = np.flip(indices[1])
         y = np.flip(indices[0])
         #apex = ApexBuilder(x, y)
-        reconstruct(x, y)
+        #reconstruct(x, y)
         if save:
             imageio.imwrite(filename, np.uint8(final_image))
         # Extract and save profile features to feature list
@@ -147,6 +155,7 @@ class DropProfile:
             features.feature_set["image"] = filename
             self.feature_list.append(features.feature_set)
             # show_image(final_image)
+            #place_circle(self.original, features.feature_set["Apex Radius"], bottom_x=max_x_value, bottom_y=bottom_y)
             print(f"{filename}: {features.show_features()}")
             return final_image, features.feature_set, x, y
         fft_profile(final_image)
@@ -159,6 +168,14 @@ def reconstruct(x_coords, y_coords):
     for x, y in zip(x_coords, y_coords):
         image_array[y, x] = 255
     show_image(image_array)
+
+
+def superimpose_edge(original, edge):
+    print("Showing original")
+    show_image(original)
+    result = np.concatenate([original, edge], axis=0)
+    show_image(result)
+
 
 #    Execute the Canny Sequence on the image
 #    gaussian_blur_sigma value = 1.2
@@ -174,7 +191,7 @@ def extract_profile_from_image(path_to_file: str, img: ndimage = None, load=True
     nms = normalize(nms_with_interpol(mag, gradient, dx, dy))
     profile = hysteresis_threshold(nms)
     show_image(profile)
-    return profile
+    return img, profile
 
 
 # We have a grayscale ndarray.
@@ -229,7 +246,7 @@ def load_edge(img: str) -> ndimage:
 # Load the next image in subdir
 # img: passed in as full directory
 # 1.2
-def load_convert_image(img: str, sigma_val=1.6):
+def load_convert_image(img: str, sigma_val=1.2):
     lion = imageio.v2.imread(img, None)
     lion_gray = np.dot(lion[..., :3], [0.299, 0.587, 0.114])
     # Find the middle row index
@@ -352,6 +369,52 @@ def fft_profile(profile):
     # Shift the zero-frequency component to the center of the spectrum
     magnitude_spectrum = 20 * np.log(np.abs(fft_image))
     phase_spectrum = np.angle(fft_image)
+
+
+import numpy as np
+import matplotlib.pyplot as plt  # Only for displaying the image (optional)
+
+
+def draw_circle_on_ndarray(image, center, radius, color=255):
+    """
+    Draw a circle on a 2D ndarray (grayscale image).
+
+    Args:
+        image (np.ndarray): Grayscale image represented as a NumPy ndarray.
+        center (tuple): Center coordinates (x, y) of the circle.
+        radius (int): Radius of the circle in pixels.
+        color (int): Pixel intensity (default is white, 255).
+
+    Returns:
+        np.ndarray: Image with the drawn circle.
+    """
+    # Create a copy of the input image to avoid modifying the original
+    image_with_circle = image.copy()
+
+    # Generate a grid of x and y coordinates
+    y, x = np.ogrid[:image.shape[0], :image.shape[1]]
+
+    # Create a mask for the circle using the equation of a circle
+    mask = ((x - center[0]) ** 2 + (y - center[1]) ** 2 <= radius ** 2)
+
+    # Draw the circle on the image by setting the corresponding pixels to the specified color
+    image_with_circle[mask] = color
+
+    return image_with_circle
+
+
+def place_circle(image, apex_radius: int, bottom_x, bottom_y):
+    # Example usage:
+    # Create a sample grayscale image (you should load your own image)
+    center_coordinates = (bottom_x, bottom_y - apex_radius)  # Example center coordinates (x, y)
+    circle_radius = apex_radius  # Example radius in pixels
+
+    result_image = draw_circle_on_ndarray(image, center_coordinates, circle_radius)
+
+    # Display the result (optional)
+    plt.imshow(result_image, cmap='gray')
+    plt.axis('off')
+    plt.show()
 
 
 if __name__ == '__main__':

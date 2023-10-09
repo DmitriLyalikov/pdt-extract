@@ -50,7 +50,7 @@ class FeatureExtract:
         # Normalize to dimensionless ratio to apex radius
         self.feature_set = {
             "Drop height": self.drop_height / self.apex_radius,
-            "Capillary radius": self.capillary_radius / self.apex_radius,
+            "Capillary radius": (self.capillary_radius - 6 )/ self.apex_radius,
             "R-s": self.s_radius / self.apex_radius,
             "R-e": self.equator_radius / self.apex_radius,
             "Apex Radius": self.apex_radius
@@ -60,7 +60,7 @@ class FeatureExtract:
         # self.feature_set["LightGBM Beta"] = self.lgbm_beta
         """
         print(f"Apex radius (Pixels): {self.apex_radius }")
-        print(f"Equator radius: {self.equator_radius }\n"
+        print(f"Equator0 radius: {self.equator_radius }\n"
               f"S radius: {self.s_radius }\n"
               f"Capillary radius: {self.capillary_radius}\n"
               f"Drop Height: {self.drop_height }")
