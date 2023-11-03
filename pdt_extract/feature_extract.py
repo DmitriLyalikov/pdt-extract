@@ -23,7 +23,7 @@ from circle_fit import taubinSVD, lm, prattSVD, hyperSVD
 import matplotlib.pyplot as plt
 import pickle
 import pandas as pd
-#import cv2
+import cv2
 
 
 class FeatureExtract:
