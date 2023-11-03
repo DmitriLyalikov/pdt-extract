@@ -1,6 +1,8 @@
 README.md
 setup.py
 pdt_extract/__init__.py
+pdt_extract/apex_radius.py
+pdt_extract/circle_plot.py
 pdt_extract/feature_extract.py
 pdt_extract/original_extraction_functions.py
 pdt_extract/pdt_extract.py

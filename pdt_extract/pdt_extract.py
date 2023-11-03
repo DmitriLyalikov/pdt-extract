@@ -27,7 +27,7 @@ from numpy import fft
 import matplotlib.pyplot as plt
 import pandas as pd
 import warnings
-import cv2
+# import cv2
 warnings.filterwarnings("ignore")
 
 class DropProfile:

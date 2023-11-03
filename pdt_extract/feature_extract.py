@@ -23,7 +23,7 @@ from circle_fit import taubinSVD, lm, prattSVD, hyperSVD
 import matplotlib.pyplot as plt
 import pickle
 import pandas as pd
-import cv2
+#import cv2
 
 
 class FeatureExtract:
@@ -162,7 +162,6 @@ class FeatureExtract:
         self.feature_positions["Apex"] = (0, len(r_0), len(r_0))
         return r_0[-1]
 
-
     # Find maximum (bulge) x value from 70% of profile
     def find_equator_radius(self):
         split = int(len(self.x) * 0.7)
@@ -227,9 +226,22 @@ class FeatureExtract:
         df = pd.DataFrame(tensor)
         df.to_csv(".." + '/' + "tensors" + '/' + self.tensor_file, mode='a', header=False, index=False)
 
-
         return tensor
 
+
+
+"""
+    Pad or truncate a list to have exactly 400 points.
+
+    If the input list `tensor` has more than 400 points, it removes evenly spaced points across the entire list to
+    reduce it to 400 points. If it has fewer than 400 points, it pads the list with zeros to reach the desired length.
+
+    Parameters:
+    tensor (list): A list of data points.
+
+    Returns:
+    list: The modified list with exactly 400 points.
+"""
 def pad_truncate(tensor: list):
     # If tensor is greater than 400 points, remove evenly spaced points across whole tensor so that it is 400 points
     print(tensor)
@@ -248,10 +260,11 @@ def pad_truncate(tensor: list):
             num_pairs = len(tensor) // 2
 
     if len(tensor) < 400:
-       for i in range(400 - len(tensor)):
+        for i in range(400 - len(tensor)):
             tensor.append(0)
 
     return tensor
+
 class ProfileGenerator:
     def __init__(self, x, y, features, height=500, width=500):
         self.x = x

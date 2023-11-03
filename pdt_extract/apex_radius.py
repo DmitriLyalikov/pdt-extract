@@ -22,7 +22,7 @@ import numpy as np
 from circle_fit import taubinSVD
 import matplotlib.pyplot as plt
 import pickle
-import cv2
+# import cv2
 
 def split_lists_by_percent(list1, list2, percent):
     if len(list1) != len(list2):
