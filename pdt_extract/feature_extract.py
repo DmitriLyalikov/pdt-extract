@@ -35,7 +35,7 @@ class FeatureExtract:
 
         self.x = x
         self.y = y
-        self.tensorfile = tensor_file
+        self.tensor_file = tensor_file
 
         self.feature_positions = {
             "Drop Height": [1, 0, 0],
@@ -225,7 +225,7 @@ class FeatureExtract:
         tensor = np.array(tensor)
         tensor = tensor.reshape(1, -1)
         df = pd.DataFrame(tensor)
-        df.to_csv(".." + '/' + "tensors" + '/' + self.tensorfile, mode='a', header=False, index=False)
+        df.to_csv(".." + '/' + "tensors" + '/' + self.tensor_file, mode='a', header=False, index=False)
 
 
         return tensor
