@@ -22,11 +22,12 @@ import numpy as np
 from circle_fit import taubinSVD, lm, prattSVD, hyperSVD
 import matplotlib.pyplot as plt
 import pickle
+import pandas as pd
 import cv2
 
 
 class FeatureExtract:
-    def __init__(self, x: list[int], y: list[int]):
+    def __init__(self, x: list[int], y: list[int], tensor_file="tensors.csv"):
         """
         :param x: globally used ordered set of x coordinates of the pendant drop profile
         :param y: globally used ordered set of x coordinates of the pendant drop profile
@@ -34,6 +35,8 @@ class FeatureExtract:
 
         self.x = x
         self.y = y
+        self.tensorfile = tensor_file
+
         self.feature_positions = {
             "Drop Height": [1, 0, 0],
             "Capillary": [0, -1, -1],
@@ -46,11 +49,12 @@ class FeatureExtract:
         self.drop_height = self.y[0]
         self.equator_radius, self.s_radius = self.find_re_rs()
 
-        self.apex_radius = self.find_apex_radius()
+        self.apex_radius = 172# self.find_apex_radius()
+        self.build_tensor()
         # Normalize to dimensionless ratio to apex radius
         self.feature_set = {
             "Drop height": self.drop_height / self.apex_radius,
-            "Capillary radius": (self.capillary_radius - 6 )/ self.apex_radius,
+            "Capillary radius": self.capillary_radius / self.apex_radius,
             "R-s": self.s_radius / self.apex_radius,
             "R-e": self.equator_radius / self.apex_radius,
             "Apex Radius": self.apex_radius
@@ -60,7 +64,7 @@ class FeatureExtract:
         # self.feature_set["LightGBM Beta"] = self.lgbm_beta
         """
         print(f"Apex radius (Pixels): {self.apex_radius }")
-        print(f"Equator0 radius: {self.equator_radius }\n"
+        print(f"Equator radius: {self.equator_radius }\n"
               f"S radius: {self.s_radius }\n"
               f"Capillary radius: {self.capillary_radius}\n"
               f"Drop Height: {self.drop_height }")
@@ -142,7 +146,7 @@ class FeatureExtract:
 
         num_point_ro_circlefit = round(len(self.x) * ratio_drop_length) + 1
 
-        percent_drop_ro = 0.246
+        percent_drop_ro = 0.1
         i = 0
         diff = 0
         r0 = 0
@@ -197,6 +201,57 @@ class FeatureExtract:
         plt.imshow(img, cmap=plt.get_cmap('gray'))
         plt.show()
 
+
+    """
+    def build_tensor(self):
+        Take X and Y list and construct normalized tensor of size 400
+        Format: x0, y0, x1, y1, ... x199, y199 
+        Where x0, y0 is the first point in the profile and all points are normalized to the Apex Radius
+        Write as row to csv file: self.tensorfile
+        :return: tensor of size 200 
+    """
+    def build_tensor(self):
+        tensor = []
+        for i in range(len(self.x)):
+            tensor.append(self.x[i] / self.apex_radius)
+            tensor.append(self.y[i] / self.apex_radius)
+        # If tensor is less than 400 points, pad with 0s at end
+
+        tensor = pad_truncate(tensor)
+
+        print(len(tensor))
+
+        # Convert to dataframe and write to csv
+        tensor = np.array(tensor)
+        tensor = tensor.reshape(1, -1)
+        df = pd.DataFrame(tensor)
+        df.to_csv(".." + '/' + "tensors" + '/' + self.tensorfile, mode='a', header=False, index=False)
+
+
+        return tensor
+
+def pad_truncate(tensor: list):
+    # If tensor is greater than 400 points, remove evenly spaced points across whole tensor so that it is 400 points
+    print(tensor)
+    num_pairs = len(tensor) // 2
+    if len(tensor) > 400:
+        target_pairs = 200
+        step = (num_pairs // (target_pairs // 2)) + 1
+
+        while num_pairs > target_pairs:
+            indices_to_remove = [i for i in range(step - 1, num_pairs, step)]
+            indices_to_remove.reverse()
+            print(indices_to_remove)
+            # Remove elements in reverse order to minimize impact on the end of the list
+            for index in indices_to_remove:
+                del tensor[2 * index:2 * (index + 1)]
+            num_pairs = len(tensor) // 2
+
+    if len(tensor) < 400:
+       for i in range(400 - len(tensor)):
+            tensor.append(0)
+
+    return tensor
 class ProfileGenerator:
     def __init__(self, x, y, features, height=500, width=500):
         self.x = x
@@ -277,4 +332,6 @@ def Find_Re_Rs(x,y,n,Drop_Height, R_Cap):
     R_s=R_Cap
     rs_pos = 0
   return R_e,R_s, re_pos, rs_pos
+
+
 
