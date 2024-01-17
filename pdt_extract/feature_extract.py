@@ -49,7 +49,7 @@ class FeatureExtract:
         self.drop_height = self.y[0]
         self.equator_radius, self.s_radius = self.find_re_rs()
 
-        self.apex_radius = 172# self.find_apex_radius()
+        self.apex_radius = 168# self.find_apex_radius()
         self.build_tensor()
         # Normalize to dimensionless ratio to apex radius
         self.feature_set = {
